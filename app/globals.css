@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 215 50% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 50% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 50% 15%;
+
+    /* Primary = aqua */
+    --primary: 194 100% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary = navy */
+    --secondary: 215 72% 14%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Accent = gold */
+    --accent: 43 66% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 194 100% 42%;
+
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+}
+
+/* ─── Ocean wave divider ───────────────────────────────────────────────────── */
+.wave-divider {
+  position: relative;
+  overflow: hidden;
+}
+.wave-divider::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 200%;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60'%3E%3Cpath d='M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x;
+  background-size: 600px 60px;
+  animation: wave-slow 20s linear infinite;
+}
+
+/* ─── Shimmer loading skeleton ─────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    theme('colors.muted.DEFAULT') 25%,
+    theme('colors.white') 50%,
+    theme('colors.muted.DEFAULT') 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ─── Prose overrides for blog content ─────────────────────────────────────── */
+.prose-aqua {
+  --tw-prose-headings: theme('colors.navy.DEFAULT');
+  --tw-prose-links: theme('colors.aqua.DEFAULT');
+  --tw-prose-bold: theme('colors.navy.DEFAULT');
+}
+
+/* ─── Scroll snap for product carousels ────────────────────────────────────── */
+.snap-x-mandatory {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.snap-x-mandatory > * {
+  scroll-snap-align: start;
+}
+
+/* ─── Focus ring override for brand color ──────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid theme('colors.aqua.DEFAULT');
+  outline-offset: 2px;
+}

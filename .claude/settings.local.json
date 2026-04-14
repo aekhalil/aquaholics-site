@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Remove-Item \"D:\\\\Aquaholics\\\\next.config.ts\" -Force)",
+      "Bash(dir \"D:\\\\Aquaholics\\\\public\\\\\")",
+      "WebFetch(domain:www.blueearthaquariums.com)",
+      "Bash(wc -l /d/Aquaholics/components/home/*.tsx)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "mcp__kapture__list_tabs",
+      "mcp__kapture__new_tab"
+    ]
+  }
+}
