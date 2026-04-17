@@ -39,7 +39,7 @@ export const product = defineType({
     }),
   ],
   preview: {
-    select: { title: 'name', subtitle: 'category', media: 'images.0' },
+    select: { title: 'name', subtitle: 'category', media: 'images.0', inStock: 'inStock' },
     prepare(v) { return { title: v.title, subtitle: `${v.subtitle} · ${v.inStock ? 'In Stock' : 'Out of Stock'}` } },
   },
 })
