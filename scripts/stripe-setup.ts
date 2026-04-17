@@ -11,7 +11,7 @@
 
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-11-20.acacia' })
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-02-24.acacia' })
 
 const PLANS = [
   {
@@ -66,7 +66,4 @@ async function setupStripe() {
   console.log('\nDone! 🎉')
 }
 
-setupStripe().catch((err) => {
-  console.error('Stripe setup failed:', err.message)
-  process.exit(1)
-})
+setupStripe().catch(console.error)
