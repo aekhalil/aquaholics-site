@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { CheckCircle, XCircle, Search } from 'lucide-react'
+import { CheckCircle, XCircle, Search, Phone, Mail } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { formatPrice, cn } from '@/lib/utils'
 import { siteImages } from '@/lib/site-images'
@@ -151,7 +151,16 @@ function ProductCard({ product }: { product: Product }) {
 }
 
 export function ShopGrid({ initialProducts }: ShopGridProps) {
-  const products = initialProducts.length > 0 ? initialProducts : PLACEHOLDER_PRODUCTS
+  // Placeholder products are a dev-time convenience so the grid renders
+  // when Sanity isn't configured locally. In production they'd be dead
+  // links — each placeholder slug 404s on /shop/[slug] because those IDs
+  // don't exist in Sanity — so prod falls through to the empty state.
+  const products =
+    initialProducts.length > 0
+      ? initialProducts
+      : process.env.NODE_ENV === 'development'
+        ? PLACEHOLDER_PRODUCTS
+        : []
   const [category, setCategory] = React.useState('all')
   const [sort, setSort] = React.useState('default')
   const [search, setSearch] = React.useState('')
@@ -172,6 +181,40 @@ export function ShopGrid({ initialProducts }: ShopGridProps) {
   }, [products, category, sort, search])
 
   const inStockCount = products.filter((p) => p.inStock).length
+
+  if (products.length === 0) {
+    return (
+      <div className="container mx-auto px-4 lg:px-8 py-20">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="inline-block bg-aqua/10 text-aqua text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+            Inventory rotating
+          </div>
+          <h1 className="font-display text-4xl sm:text-5xl font-bold text-navy mb-4">
+            Nothing in holding right now
+          </h1>
+          <p className="text-gray-500 text-lg mb-8">
+            Nick&apos;s livestock rotates constantly and the next batch may already be on its way.
+            Call or text for current availability, or leave your email and we&apos;ll ping you the
+            moment new corals, fish, and inverts arrive.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="tel:+15613887262"
+              className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-md bg-navy text-white font-medium hover:bg-navy/90 transition"
+            >
+              <Phone className="h-4 w-4" /> (561) 388-7262
+            </Link>
+            <Link
+              href="mailto:nick@aquaholicspb.com"
+              className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-md border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition"
+            >
+              <Mail className="h-4 w-4" /> nick@aquaholicspb.com
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="container mx-auto px-4 lg:px-8 py-12">
