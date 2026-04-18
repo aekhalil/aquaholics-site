@@ -31,3 +31,7 @@ next-env.d.ts
 # OS
 .DS_Store
 Thumbs.db
+
+# Claude Code worktrees and local working docs
+.claude/worktrees/
+/Aquaholics_Website_Launch_Checklist.docx
