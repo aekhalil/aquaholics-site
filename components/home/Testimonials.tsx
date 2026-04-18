@@ -19,6 +19,14 @@ interface TestimonialsProps {
 
 const PLACEHOLDER_TESTIMONIALS: Testimonial[] = [
   {
+    _id: '0',
+    name: 'Alex Khalil',
+    location: 'Palm Beach County',
+    rating: 5,
+    text: "Nick walked me through my first 20-gallon nano years ago, then a 50-gallon, then a 150-gallon build for my home. When my lifestyle shifted to smaller tanks, he helped me break down and sell the bigger setups — I profited on both sales and kept my original as an office tank. This hobby can be brutally expensive, but Nick saved me from every costly mistake I would have made. The knowledge, professionalism, and honest guidance are unmatched.",
+    service: 'Custom Installation',
+  },
+  {
     _id: '1',
     name: 'Michael R.',
     location: 'West Palm Beach',
@@ -138,13 +146,13 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
               className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-colors"
             >
               <Quote className="h-8 w-8 text-aqua mb-4 opacity-60" />
-              <p className="text-white/85 text-sm leading-relaxed mb-6">
+              <p className="text-white text-sm leading-relaxed mb-6">
                 &ldquo;{t.text}&rdquo;
               </p>
               <div className="flex items-center justify-between">
                 <div>
                   <div className="font-semibold text-white text-sm">{t.name}</div>
-                  <div className="text-white/50 text-xs">{t.location}</div>
+                  <div className="text-white/70 text-xs">{t.location}</div>
                 </div>
                 <div className="text-right">
                   <StarRating rating={t.rating} />

@@ -132,16 +132,6 @@ export function BeforeAfterGallery({ projects }: BeforeAfterGalleryProps) {
                   </div>
                 </div>
 
-                {/* Always-visible category badge */}
-                <div className="absolute top-3 left-3">
-                  <span
-                    className={`text-xs font-medium px-2 py-0.5 rounded-full ${
-                      CATEGORY_COLORS[project.category] ?? 'bg-white/80 text-gray-700'
-                    }`}
-                  >
-                    {CATEGORY_LABELS[project.category] ?? project.category}
-                  </span>
-                </div>
               </Link>
             </motion.div>
           ))}

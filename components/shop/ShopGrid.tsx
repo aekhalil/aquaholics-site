@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge'
 import { useCart } from '@/components/shop/CartProvider'
 import { useToast } from '@/components/ui/use-toast'
 import { formatPrice, cn } from '@/lib/utils'
+import { siteImages } from '@/lib/site-images'
 
 interface Product {
   _id: string
@@ -55,20 +56,20 @@ const CARE_COLORS: Record<string, string> = {
   Expert: 'bg-purple-100 text-purple-700',
 }
 
-// Placeholder products for when Sanity isn't connected
+const img = (url: string) => ({ asset: { url } })
 const PLACEHOLDER_PRODUCTS: Product[] = [
-  { _id: '1', name: 'Acropora millepora (Green Tip)', slug: { current: 'acropora-millepora-green-tip' }, category: 'corals', price: 4999, inStock: true, stockCount: 3, images: [], shortDescription: 'Stunning SPS coral with vivid green polyp tips. High flow, high light required.', careLevel: 'Advanced', isFeatured: true },
-  { _id: '2', name: 'Mandarin Dragonet', slug: { current: 'mandarin-dragonet' }, category: 'fish', price: 5999, inStock: true, stockCount: 2, images: [], shortDescription: 'Trained to eat frozen food. One of the most colorful fish in the hobby.', careLevel: 'Intermediate' },
-  { _id: '3', name: 'Hammer Coral (Gold)', slug: { current: 'hammer-coral-gold' }, category: 'corals', price: 3499, inStock: true, stockCount: 5, images: [], shortDescription: 'LPS beginner-friendly with excellent polyp extension. Gold/yellow coloration.', careLevel: 'Beginner', isFeatured: true },
-  { _id: '4', name: 'Peppermint Shrimp 3-Pack', slug: { current: 'peppermint-shrimp-3pack' }, category: 'inverts', price: 2999, inStock: true, stockCount: 10, images: [], shortDescription: 'Natural aiptasia eaters. Hardy, reef-safe cleaners.', careLevel: 'Beginner' },
-  { _id: '5', name: 'Orange Storm Clownfish (Pair)', slug: { current: 'orange-storm-clownfish-pair' }, category: 'fish', price: 8999, inStock: false, images: [], shortDescription: 'Designer clownfish in a captive-bred mated pair. ORA certified.', careLevel: 'Beginner' },
-  { _id: '6', name: 'Duncan Coral (10 heads)', slug: { current: 'duncan-coral-10head' }, category: 'corals', price: 5499, inStock: true, stockCount: 4, images: [], shortDescription: 'Australian Duncan with green centers. Fast grower in medium light.', careLevel: 'Beginner' },
-  { _id: '7', name: 'Tuxedo Urchin', slug: { current: 'tuxedo-urchin' }, category: 'inverts', price: 1999, inStock: true, stockCount: 8, images: [], shortDescription: 'Excellent algae grazer with stunning blue body. Safe for most reefs.', careLevel: 'Beginner' },
-  { _id: '8', name: 'AI Prime 16HD LED', slug: { current: 'ai-prime-16hd' }, category: 'equipment', price: 26999, inStock: true, stockCount: 6, images: [], shortDescription: 'WiFi-controlled full spectrum LED for tanks up to 24".', careLevel: undefined },
-  { _id: '9', name: 'Blastomussa Wellsi (Rainbow)', slug: { current: 'blastomussa-rainbow' }, category: 'corals', price: 3999, inStock: true, stockCount: 3, images: [], shortDescription: 'Rainbow Blasto with multi-colored polyps. Low-light, beginner LPS.', careLevel: 'Beginner' },
-  { _id: '10', name: 'Tailspot Blenny', slug: { current: 'tailspot-blenny' }, category: 'fish', price: 2499, inStock: true, stockCount: 4, images: [], shortDescription: 'Excellent algae grazer. Peaceful, reef-safe, personable fish.', careLevel: 'Beginner' },
-  { _id: '11', name: 'Hammer Coral (Branching Purple)', slug: { current: 'hammer-coral-branching-purple' }, category: 'corals', price: 4499, inStock: false, images: [], shortDescription: 'Purple branching hammer with teal tips. Medium light, medium flow.', careLevel: 'Beginner' },
-  { _id: '12', name: 'Bubble Tip Anemone (Red)', slug: { current: 'bta-red' }, category: 'inverts', price: 5999, inStock: true, stockCount: 2, images: [], shortDescription: 'RBTA, great host for clownfish. Captive-propagated.', careLevel: 'Intermediate' },
+  { _id: '1', name: 'Acropora millepora (Green Tip)', slug: { current: 'acropora-millepora-green-tip' }, category: 'corals', price: 4999, inStock: true, stockCount: 3, images: [img(siteImages.shop['acropora-millepora-green-tip'])], shortDescription: 'Stunning SPS coral with vivid green polyp tips. High flow, high light required.', careLevel: 'Advanced', isFeatured: true },
+  { _id: '2', name: 'Mandarin Dragonet', slug: { current: 'mandarin-dragonet' }, category: 'fish', price: 5999, inStock: true, stockCount: 2, images: [img(siteImages.shop['mandarin-dragonet'])], shortDescription: 'Trained to eat frozen food. One of the most colorful fish in the hobby.', careLevel: 'Intermediate' },
+  { _id: '3', name: 'Hammer Coral (Gold)', slug: { current: 'hammer-coral-gold' }, category: 'corals', price: 3499, inStock: true, stockCount: 5, images: [img(siteImages.shop['hammer-coral-gold'])], shortDescription: 'LPS beginner-friendly with excellent polyp extension. Gold/yellow coloration.', careLevel: 'Beginner', isFeatured: true },
+  { _id: '4', name: 'Peppermint Shrimp 3-Pack', slug: { current: 'peppermint-shrimp-3pack' }, category: 'inverts', price: 2999, inStock: true, stockCount: 10, images: [img(siteImages.shop['peppermint-shrimp-3pack'])], shortDescription: 'Natural aiptasia eaters. Hardy, reef-safe cleaners.', careLevel: 'Beginner' },
+  { _id: '5', name: 'Orange Storm Clownfish (Pair)', slug: { current: 'orange-storm-clownfish-pair' }, category: 'fish', price: 8999, inStock: false, images: [img(siteImages.shop['orange-storm-clownfish-pair'])], shortDescription: 'Designer clownfish in a captive-bred mated pair. ORA certified.', careLevel: 'Beginner' },
+  { _id: '6', name: 'Duncan Coral (10 heads)', slug: { current: 'duncan-coral-10head' }, category: 'corals', price: 5499, inStock: true, stockCount: 4, images: [img(siteImages.shop['duncan-coral-10head'])], shortDescription: 'Australian Duncan with green centers. Fast grower in medium light.', careLevel: 'Beginner' },
+  { _id: '7', name: 'Tuxedo Urchin', slug: { current: 'tuxedo-urchin' }, category: 'inverts', price: 1999, inStock: true, stockCount: 8, images: [img(siteImages.shop['tuxedo-urchin'])], shortDescription: 'Excellent algae grazer with stunning blue body. Safe for most reefs.', careLevel: 'Beginner' },
+  { _id: '8', name: 'AI Prime 16HD LED', slug: { current: 'ai-prime-16hd' }, category: 'equipment', price: 26999, inStock: true, stockCount: 6, images: [img(siteImages.shop['ai-prime-16hd'])], shortDescription: 'WiFi-controlled full spectrum LED for tanks up to 24".', careLevel: undefined },
+  { _id: '9', name: 'Blastomussa Wellsi (Rainbow)', slug: { current: 'blastomussa-rainbow' }, category: 'corals', price: 3999, inStock: true, stockCount: 3, images: [img(siteImages.shop['blastomussa-rainbow'])], shortDescription: 'Rainbow Blasto with multi-colored polyps. Low-light, beginner LPS.', careLevel: 'Beginner' },
+  { _id: '10', name: 'Tailspot Blenny', slug: { current: 'tailspot-blenny' }, category: 'fish', price: 2499, inStock: true, stockCount: 4, images: [img(siteImages.shop['tailspot-blenny'])], shortDescription: 'Excellent algae grazer. Peaceful, reef-safe, personable fish.', careLevel: 'Beginner' },
+  { _id: '11', name: 'Hammer Coral (Branching Purple)', slug: { current: 'hammer-coral-branching-purple' }, category: 'corals', price: 4499, inStock: false, images: [img(siteImages.shop['hammer-coral-branching-purple'])], shortDescription: 'Purple branching hammer with teal tips. Medium light, medium flow.', careLevel: 'Beginner' },
+  { _id: '12', name: 'Bubble Tip Anemone (Red)', slug: { current: 'bta-red' }, category: 'inverts', price: 5999, inStock: true, stockCount: 2, images: [img(siteImages.shop['bta-red'])], shortDescription: 'RBTA, great host for clownfish. Captive-propagated.', careLevel: 'Intermediate' },
 ]
 
 function ProductCard({ product }: { product: Product }) {

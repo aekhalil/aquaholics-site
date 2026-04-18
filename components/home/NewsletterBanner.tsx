@@ -68,7 +68,7 @@ export function NewsletterBanner() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-aqua flex-1"
+                className="bg-white/15 border-white/30 text-white placeholder:text-white/60 focus-visible:ring-aqua focus-visible:border-aqua flex-1"
                 aria-label="Email address"
               />
               <Button type="submit" variant="gold" disabled={loading} className="flex-shrink-0">
@@ -77,7 +77,7 @@ export function NewsletterBanner() {
             </form>
           )}
 
-          <p className="text-white/30 text-xs mt-4">
+          <p className="text-white/60 text-xs mt-4">
             No spam. Unsubscribe any time. We send 1–2 emails per week.
           </p>
         </motion.div>

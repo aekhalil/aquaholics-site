@@ -13,7 +13,7 @@ export default function ContactPage() {
       <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
         <div className="text-center mb-12">
           <h1 className="font-display text-5xl font-bold text-navy mb-4">Get in Touch</h1>
-          <p className="text-gray-500 text-xl">We respond to all inquiries within 24 hours.</p>
+          <p className="text-gray-600 text-xl">We respond to all inquiries within 24 hours.</p>
         </div>
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact info */}
@@ -30,7 +30,7 @@ export default function ContactPage() {
                     <Icon className="h-5 w-5 text-aqua" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400 mb-0.5">{label}</p>
+                    <p className="text-sm text-gray-600 mb-0.5 font-medium">{label}</p>
                     {href ? (
                       <a href={href} className="text-navy font-medium hover:text-aqua transition-colors">{value}</a>
                     ) : (

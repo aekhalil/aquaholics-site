@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Fraunces } from 'next/font/google'
 import './globals.css'
@@ -83,6 +83,17 @@ export const metadata: Metadata = {
     // Add Google Search Console verification token here
     // google: 'your-verification-token',
   },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#0a1f3d' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a1f3d' },
+  ],
 }
 
 export default function RootLayout({

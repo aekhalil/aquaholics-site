@@ -43,11 +43,37 @@
   * {
     @apply border-border;
   }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
   body {
     @apply bg-background text-foreground antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
   }
   h1, h2, h3, h4 {
     @apply font-display;
+  }
+  /* Prevent iOS auto-zoom on form controls without breaking desktop density */
+  @media (max-width: 640px) {
+    input, select, textarea {
+      font-size: 16px;
+    }
+  }
+}
+
+/* iOS safe-area-inset utilities — keeps fixed bars above the home indicator */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+/* Mobile: reserve footer space under the fixed sticky CTA (lg:hidden = below 1024px) */
+@media (max-width: 1023px) {
+  footer {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom)) !important;
   }
 }
 

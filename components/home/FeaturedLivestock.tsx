@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge'
 import { useCart } from '@/components/shop/CartProvider'
 import { useToast } from '@/components/ui/use-toast'
 import { formatPrice } from '@/lib/utils'
+import { siteImages } from '@/lib/site-images'
 
 interface Product {
   _id: string
@@ -157,16 +158,16 @@ function ProductCard({ product }: { product: Product }) {
   )
 }
 
-// Static placeholder products shown before Sanity loads
+const img = (url: string) => ({ asset: { url } })
 const PLACEHOLDER_PRODUCTS: Product[] = [
-  { _id: '1', name: 'Acropora millepora (Green Tip)', slug: { current: 'acropora-millepora-green-tip' }, category: 'corals', price: 4999, inStock: true, images: [], shortDescription: 'A stunning branching SPS coral with vivid green polyp tips. Perfect for high-flow, high-light SPS systems.', careLevel: 'Advanced' },
-  { _id: '2', name: 'Mandarin Dragonet', slug: { current: 'mandarin-dragonet' }, category: 'fish', price: 5999, inStock: true, images: [], shortDescription: 'One of the most strikingly colored fish in the hobby. Trained to eat frozen food.', careLevel: 'Intermediate' },
-  { _id: '3', name: 'Hammer Coral (Gold)', slug: { current: 'hammer-coral-gold' }, category: 'corals', price: 3499, inStock: true, images: [], shortDescription: 'Gold/yellow branching hammer with excellent polyp extension. LPS beginner-friendly.', careLevel: 'Beginner' },
-  { _id: '4', name: 'Peppermint Shrimp (3-pack)', slug: { current: 'peppermint-shrimp-3pack' }, category: 'inverts', price: 2999, inStock: true, images: [], shortDescription: 'Natural aiptasia eaters. Hardy, active cleaners safe for reef tanks.', careLevel: 'Beginner' },
-  { _id: '5', name: 'Orange Storm Clownfish (Pair)', slug: { current: 'orange-storm-clownfish-pair' }, category: 'fish', price: 8999, inStock: false, images: [], shortDescription: 'Stunning designer clownfish in a captive-bred mated pair. ORA stock.', careLevel: 'Beginner' },
-  { _id: '6', name: 'Duncan Coral (10-head)', slug: { current: 'duncan-coral-10head' }, category: 'corals', price: 5499, inStock: true, images: [], shortDescription: 'Large 10-head Australian Duncan with green centers. Fast grower in medium light.', careLevel: 'Beginner' },
-  { _id: '7', name: 'Tuxedo Urchin', slug: { current: 'tuxedo-urchin' }, category: 'inverts', price: 1999, inStock: true, images: [], shortDescription: 'Excellent algae grazer with a stunning blue body. Safe for most reef fish.', careLevel: 'Beginner' },
-  { _id: '8', name: 'AI Prime 16HD LED', slug: { current: 'ai-prime-16hd' }, category: 'equipment', price: 26999, inStock: true, images: [], shortDescription: 'Versatile, WiFi-controlled reef LED with full spectrum output. Covers tanks up to 24".', careLevel: undefined },
+  { _id: '1', name: 'Acropora millepora (Green Tip)', slug: { current: 'acropora-millepora-green-tip' }, category: 'corals', price: 4999, inStock: true, images: [img(siteImages.shop['acropora-millepora-green-tip'])], shortDescription: 'A stunning branching SPS coral with vivid green polyp tips. Perfect for high-flow, high-light SPS systems.', careLevel: 'Advanced' },
+  { _id: '2', name: 'Mandarin Dragonet', slug: { current: 'mandarin-dragonet' }, category: 'fish', price: 5999, inStock: true, images: [img(siteImages.shop['mandarin-dragonet'])], shortDescription: 'One of the most strikingly colored fish in the hobby. Trained to eat frozen food.', careLevel: 'Intermediate' },
+  { _id: '3', name: 'Hammer Coral (Gold)', slug: { current: 'hammer-coral-gold' }, category: 'corals', price: 3499, inStock: true, images: [img(siteImages.shop['hammer-coral-gold'])], shortDescription: 'Gold/yellow branching hammer with excellent polyp extension. LPS beginner-friendly.', careLevel: 'Beginner' },
+  { _id: '4', name: 'Peppermint Shrimp (3-pack)', slug: { current: 'peppermint-shrimp-3pack' }, category: 'inverts', price: 2999, inStock: true, images: [img(siteImages.shop['peppermint-shrimp-3pack'])], shortDescription: 'Natural aiptasia eaters. Hardy, active cleaners safe for reef tanks.', careLevel: 'Beginner' },
+  { _id: '5', name: 'Orange Storm Clownfish (Pair)', slug: { current: 'orange-storm-clownfish-pair' }, category: 'fish', price: 8999, inStock: false, images: [img(siteImages.shop['orange-storm-clownfish-pair'])], shortDescription: 'Stunning designer clownfish in a captive-bred mated pair. ORA stock.', careLevel: 'Beginner' },
+  { _id: '6', name: 'Duncan Coral (10-head)', slug: { current: 'duncan-coral-10head' }, category: 'corals', price: 5499, inStock: true, images: [img(siteImages.shop['duncan-coral-10head'])], shortDescription: 'Large 10-head Australian Duncan with green centers. Fast grower in medium light.', careLevel: 'Beginner' },
+  { _id: '7', name: 'Tuxedo Urchin', slug: { current: 'tuxedo-urchin' }, category: 'inverts', price: 1999, inStock: true, images: [img(siteImages.shop['tuxedo-urchin'])], shortDescription: 'Excellent algae grazer with a stunning blue body. Safe for most reef fish.', careLevel: 'Beginner' },
+  { _id: '8', name: 'AI Prime 16HD LED', slug: { current: 'ai-prime-16hd' }, category: 'equipment', price: 26999, inStock: true, images: [img(siteImages.shop['ai-prime-16hd'])], shortDescription: 'Versatile, WiFi-controlled reef LED with full spectrum output. Covers tanks up to 24".', careLevel: undefined },
 ]
 
 export function FeaturedLivestock({ products }: FeaturedLivestockProps) {

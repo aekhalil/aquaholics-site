@@ -27,8 +27,8 @@ const BADGES = [
   },
   {
     icon: Shield,
-    title: 'Fully Insured',
-    subtitle: 'Licensed & bonded in Florida',
+    title: 'DOA Guarantee',
+    subtitle: 'Every livestock purchase covered',
     color: 'text-emerald-500',
     bg: 'bg-emerald-50',
   },

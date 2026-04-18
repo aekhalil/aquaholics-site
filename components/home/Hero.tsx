@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Star, Play } from 'lucide-react'
+import { siteImages } from '@/lib/site-images'
 
 export function Hero() {
   return (
@@ -138,7 +139,7 @@ export function Hero() {
             {/* Hero aquarium image */}
             <div className="relative rounded-3xl overflow-hidden aspect-[4/5] border border-aqua/20 shadow-2xl shadow-aqua/10">
               <Image
-                src="https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=900&q=85"
+                src={siteImages.hero}
                 alt="Stunning custom saltwater reef aquarium by Aquaholics"
                 fill
                 className="object-cover"
