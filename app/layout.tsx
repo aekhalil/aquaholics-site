@@ -8,6 +8,7 @@ import { StickyMobileCTA } from '@/components/layout/StickyMobileCTA'
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton'
 import { ExitIntentPopup } from '@/components/layout/ExitIntentPopup'
 import { Toaster } from '@/components/ui/toaster'
+import { Analytics } from '@vercel/analytics/next'
 
 // Geist is Next.js 15+ only — Inter is the closest clean sans-serif for Next.js 14
 const inter = Inter({
@@ -192,6 +193,7 @@ export default function RootLayout({
         <WhatsAppButton />
         <ExitIntentPopup />
         <Toaster />
+        <Analytics />
       </body>
     </html>
   )
