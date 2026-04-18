@@ -18,11 +18,3 @@ export const stripe = new Proxy({} as Stripe, {
           return c[prop]
     },
 })
-
-export const MAINTENANCE_PRICES = {
-    essential: process.env.STRIPE_PRICE_ESSENTIAL!,
-    professional: process.env.STRIPE_PRICE_PROFESSIONAL!,
-    premier: process.env.STRIPE_PRICE_PREMIER!,
-} as const
-
-export type MaintenanceTier = keyof typeof MAINTENANCE_PRICES
