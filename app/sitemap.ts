@@ -3,7 +3,7 @@ import { client } from '@/lib/sanity/client'
 import { ALL_POSTS_QUERY } from '@/lib/sanity/queries'
 import { SERVICE_AREAS } from '@/lib/service-areas-data'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aquaholicaquariumservices.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aquaholicspb.com'
 
 export const revalidate = 3600
 

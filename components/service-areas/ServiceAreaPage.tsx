@@ -8,7 +8,7 @@ interface ServiceAreaPageProps {
 }
 
 export function ServiceAreaPage({ area }: ServiceAreaPageProps) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aquaholicaquariumservices.com'
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aquaholicspb.com'
 
   // Local Business schema with city-specific data
   const schema = {

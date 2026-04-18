@@ -1,21 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'aquaholicaquariumservices.com' }],
-        destination: 'https://aquaholicspb.com/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.aquaholicaquariumservices.com' }],
-        destination: 'https://aquaholicspb.com/:path*',
-        permanent: true,
-      },
-    ]
-  },
   images: {
     remotePatterns: [
       {

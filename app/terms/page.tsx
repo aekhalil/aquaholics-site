@@ -21,7 +21,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-display text-2xl font-bold text-navy mb-3">1. Agreement to Terms</h2>
             <p>
-              By accessing or using the website at <strong>aquaholicaquariumservices.com</strong> or engaging the
+              By accessing or using the website at <strong>aquaholicspb.com</strong> or engaging the
               services of Aquaholics Aquarium Services LLC (&quot;Aquaholics,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), you agree to be
               bound by these Terms of Service. If you do not agree, please do not use our website or services.
             </p>

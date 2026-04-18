@@ -23,7 +23,7 @@ const fraunces = Fraunces({
   display: 'swap',
 })
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aquaholicaquariumservices.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aquaholicspb.com'
 const PHONE = process.env.NEXT_PUBLIC_PHONE ?? '+15613887262'
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? ''
 

@@ -22,7 +22,7 @@ export default function PrivacyPage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">1. Who We Are</h2>
             <p>
               Aquaholics Aquarium Services LLC (&quot;Aquaholics,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the website{' '}
-              <strong>aquaholicaquariumservices.com</strong> and provides aquarium installation, maintenance, and livestock
+              <strong>aquaholicspb.com</strong> and provides aquarium installation, maintenance, and livestock
               services in Palm Beach County, Florida. Our contact information:
             </p>
             <ul className="list-none mt-3 space-y-1 text-sm">
