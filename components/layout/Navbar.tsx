@@ -72,7 +72,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group" aria-label="Aquaholics Home">
           <Image
-            src="/Images/Hero_logo.PNG"
+            src="/logo.png"
             alt="Aquaholics Aquarium Services"
             width={44}
             height={44}

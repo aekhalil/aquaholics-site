@@ -129,7 +129,7 @@ export default function AboutPage() {
               {/* Logo card */}
               <div className="bg-navy rounded-3xl p-8 flex items-center justify-center">
                 <Image
-                  src="/Images/Hero_logo.PNG"
+                  src="/logo.png"
                   alt="Aquaholics Aquarium Service logo"
                   width={180}
                   height={180}

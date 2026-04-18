@@ -37,7 +37,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Image
-                src="/Images/Hero_logo.PNG"
+                src="/logo.png"
                 alt="Aquaholics Aquarium Services"
                 width={44}
                 height={44}
