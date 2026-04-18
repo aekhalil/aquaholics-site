@@ -41,6 +41,10 @@ function PricingCard({ tier, index }: { tier: PricingTier; index: number }) {
         body: JSON.stringify({ priceId: tier.stripePriceId, tierName: tier.name }),
       })
       const { url, error } = await res.json()
+      if (res.status === 503) {
+        toast({ title: 'Call to enroll', description: error ?? 'Online checkout is not yet available. Please call (561) 388-7262.', variant: 'destructive' })
+        return
+      }
       if (error) throw new Error(error)
       window.location.href = url
     } catch (err) {
