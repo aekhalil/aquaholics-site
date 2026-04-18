@@ -1,9 +1,16 @@
 function getSecret(): string {
-  return (
-    process.env.NEWSLETTER_UNSUBSCRIBE_SECRET ||
-    process.env.SHOP_ACCESS_SALT ||
-    'aquaholics-newsletter-default-secret'
-  )
+  const secret =
+    process.env.NEWSLETTER_UNSUBSCRIBE_SECRET || process.env.SHOP_ACCESS_SALT
+  if (secret) return secret
+  // Refusing to start in prod is safer than a hardcoded fallback — the
+  // default would be public (this file ships in git), letting anyone forge
+  // valid unsubscribe tokens for any email address on the list.
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error(
+      'NEWSLETTER_UNSUBSCRIBE_SECRET (or SHOP_ACCESS_SALT) is required in production'
+    )
+  }
+  return 'aquaholics-newsletter-dev-only-secret'
 }
 
 async function hmac(message: string): Promise<string> {
