@@ -1,19 +1,10 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { client } from '@/lib/sanity/client'
-import { PRODUCT_BY_SLUG_QUERY, ALL_PRODUCTS_QUERY } from '@/lib/sanity/queries'
+import { PRODUCT_BY_SLUG_QUERY } from '@/lib/sanity/queries'
 import { ProductDetail } from '@/components/shop/ProductDetail'
 
-export const revalidate = 60
-
-export async function generateStaticParams() {
-  try {
-    const products = await client.fetch(ALL_PRODUCTS_QUERY)
-    return products.map((p: { slug: { current: string } }) => ({ slug: p.slug.current }))
-  } catch {
-    return []
-  }
-}
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({
   params,
@@ -23,18 +14,14 @@ export async function generateMetadata({
   const { slug } = await params
   try {
     const product = await client.fetch(PRODUCT_BY_SLUG_QUERY, { slug })
-    if (!product) return { title: 'Product Not Found' }
+    if (!product) return { title: 'Not Found', robots: { index: false, follow: false } }
     return {
-      title: `${product.name} — Buy Online | Aquaholics`,
+      title: `${product.name} — Client Livestock`,
       description: product.shortDescription,
-      openGraph: {
-        title: product.name,
-        description: product.shortDescription,
-        images: product.images?.[0] ? [{ url: product.images[0].asset.url }] : [],
-      },
+      robots: { index: false, follow: false },
     }
   } catch {
-    return { title: 'Product' }
+    return { title: 'Livestock', robots: { index: false, follow: false } }
   }
 }
 

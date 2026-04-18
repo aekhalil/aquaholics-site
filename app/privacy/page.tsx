@@ -38,7 +38,7 @@ export default function PrivacyPage() {
             <ul className="list-disc pl-6 mt-3 space-y-1">
               <li><strong>Contact & quote forms:</strong> Name, email address, phone number, city, and project details.</li>
               <li><strong>Newsletter sign-up:</strong> Email address and first name.</li>
-              <li><strong>Shop purchases:</strong> Billing name, email, shipping address, and payment method (processed securely by Stripe — we never store raw card data).</li>
+              <li><strong>Livestock client accounts:</strong> Name, email, phone, and optional city / setup notes. Passwords are stored only as a salted hash — we never see or store the plaintext.</li>
               <li><strong>Maintenance plan subscriptions:</strong> Billing information processed by Stripe.</li>
               <li><strong>Service bookings:</strong> Name, email, and appointment details via Cal.com.</li>
             </ul>
@@ -153,7 +153,6 @@ export default function PrivacyPage() {
 
         <div className="mt-12 pt-8 border-t border-gray-100 text-sm text-gray-400 flex flex-wrap gap-4">
           <Link href="/terms" className="hover:text-navy transition-colors">Terms of Service</Link>
-          <Link href="/doa-policy" className="hover:text-navy transition-colors">DOA Policy</Link>
           <Link href="/" className="hover:text-navy transition-colors">Back to Home</Link>
         </div>
       </div>

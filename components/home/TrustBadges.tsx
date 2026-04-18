@@ -27,8 +27,8 @@ const BADGES = [
   },
   {
     icon: Shield,
-    title: 'DOA Guarantee',
-    subtitle: 'Every livestock purchase covered',
+    title: 'Client-First Livestock',
+    subtitle: 'Hand-selected, held for service clients',
     color: 'text-emerald-500',
     bg: 'bg-emerald-50',
   },

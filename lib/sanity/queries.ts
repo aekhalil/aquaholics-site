@@ -21,10 +21,10 @@ export const POST_BY_SLUG_QUERY = groq`
   }
 `
 
-// ── Products / Shop ──────────────────────────────────────────────────────────
+// ── Livestock ────────────────────────────────────────────────────────────────
 export const ALL_PRODUCTS_QUERY = groq`
-  *[_type == "product"] | order(_createdAt desc) {
-    _id, name, slug, category, price, compareAtPrice,
+  *[_type == "product" && category in ["corals", "fish", "inverts"]] | order(_createdAt desc) {
+    _id, name, slug, category, price,
     inStock, stockCount, isFeatured,
     images[0] { asset->{ url, metadata { lqip, dimensions } } },
     shortDescription, careLevel
@@ -32,17 +32,16 @@ export const ALL_PRODUCTS_QUERY = groq`
 `
 
 export const PRODUCT_BY_SLUG_QUERY = groq`
-  *[_type == "product" && slug.current == $slug][0] {
-    _id, name, slug, category, price, compareAtPrice,
-    inStock, stockCount, sku, stripeProductId, stripePriceId,
+  *[_type == "product" && slug.current == $slug && category in ["corals", "fish", "inverts"]][0] {
+    _id, name, slug, category, price,
+    inStock, stockCount, sku,
     images[] { asset->{ url, metadata { lqip, dimensions } } },
-    shortDescription, description, careLevel, waterType,
-    careGuide, doaPolicy, reviews[]
+    shortDescription, description, careLevel, waterType, careGuide
   }
 `
 
 export const FEATURED_PRODUCTS_QUERY = groq`
-  *[_type == "product" && isFeatured == true][0..7] {
+  *[_type == "product" && isFeatured == true && category in ["corals", "fish", "inverts"]][0..7] {
     _id, name, slug, category, price, inStock,
     images[0] { asset->{ url, metadata { lqip, dimensions } } },
     shortDescription, careLevel

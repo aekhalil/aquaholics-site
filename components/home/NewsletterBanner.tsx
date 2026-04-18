@@ -23,13 +23,22 @@ export function NewsletterBanner() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       })
+      const data = await res.json().catch(() => ({}))
       if (res.ok) {
         setSubmitted(true)
       } else {
-        throw new Error('Subscribe failed')
+        toast({
+          title: 'Could not subscribe',
+          description: data.error ?? 'Please try again.',
+          variant: 'destructive',
+        })
       }
     } catch {
-      toast({ title: 'Oops!', description: 'Something went wrong. Please try again.', variant: 'destructive' })
+      toast({
+        title: 'Oops!',
+        description: 'Something went wrong. Please try again.',
+        variant: 'destructive',
+      })
     } finally {
       setLoading(false)
     }
@@ -48,11 +57,11 @@ export function NewsletterBanner() {
             <Mail className="h-7 w-7 text-aqua" />
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
-            Get Restock Alerts + Reef Tips
+            Get Livestock Access + Arrival Alerts
           </h2>
           <p className="text-white/60 mb-8">
-            New livestock every Thursday. Be first to know — plus get our free Beginner&apos;s Reef
-            Keeping Guide when you subscribe.
+            Subscribe and we&apos;ll email you the shop access password plus a note the next time new
+            corals, fish, or inverts come in.
           </p>
 
           {submitted ? (
@@ -72,13 +81,13 @@ export function NewsletterBanner() {
                 aria-label="Email address"
               />
               <Button type="submit" variant="gold" disabled={loading} className="flex-shrink-0">
-                {loading ? 'Subscribing…' : 'Subscribe Free'}
+                {loading ? 'Sending…' : 'Get Access'}
               </Button>
             </form>
           )}
 
           <p className="text-white/60 text-xs mt-4">
-            No spam. Unsubscribe any time. We send 1–2 emails per week.
+            No spam. Unsubscribe any time. Pickup or service-visit drop-off only — we don&apos;t ship.
           </p>
         </motion.div>
       </div>

@@ -7,7 +7,14 @@
       "Bash(wc -l /d/Aquaholics/components/home/*.tsx)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
       "mcp__kapture__list_tabs",
-      "mcp__kapture__new_tab"
+      "mcp__kapture__new_tab",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(netstat -ano)",
+      "Bash(findstr \":3000 :3001 :3002\")",
+      "Bash(findstr \"LISTENING\")",
+      "Bash(findstr \":300\")",
+      "Bash(taskkill //F //PID 40824 //PID 30308 //PID 11880 //PID 40476)"
     ]
   }
 }

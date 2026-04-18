@@ -6,9 +6,9 @@ import { ShopGrid } from '@/components/shop/ShopGrid'
 export const revalidate = 60
 
 export const metadata: Metadata = {
-  title: 'Shop — Corals, Fish, Inverts & Equipment',
-  description:
-    'Buy live saltwater fish, coral frags, invertebrates, and aquarium equipment online. Real-time inventory — if it\'s listed, it\'s in stock. DOA guarantee on all livestock.',
+  title: 'Available Livestock — Client Access',
+  description: 'Corals, fish, and invertebrates currently held at Aquaholics in Riviera Beach, FL. Client access only — no shipping.',
+  robots: { index: false, follow: false },
   alternates: { canonical: '/shop' },
 }
 

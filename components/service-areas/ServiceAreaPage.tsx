@@ -136,8 +136,7 @@ export function ServiceAreaPage({ area }: ServiceAreaPageProps) {
                   { label: 'Weekly & Bi-Weekly Maintenance', href: '/services/maintenance' },
                   { label: 'Aquascaping & Tank Redesign', href: '/services/aquascaping' },
                   { label: '24/7 Emergency Service', href: '/services/emergency' },
-                  { label: 'Live Coral & Fish Sales', href: '/shop?category=corals' },
-                  { label: 'Equipment Supply & Installation', href: '/shop?category=equipment' },
+                  { label: 'Live Coral, Fish & Invert Sales (client access)', href: '/shop' },
                 ].map((svc) => (
                   <li key={svc.href} className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
