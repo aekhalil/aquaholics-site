@@ -5,10 +5,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ShoppingCart, Phone, ChevronDown } from 'lucide-react'
+import { Menu, X, Phone, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { useCart } from '@/components/shop/CartProvider'
 
 const NAV_LINKS = [
   {
@@ -21,7 +20,7 @@ const NAV_LINKS = [
       { label: '24/7 Emergency', href: '/services/emergency' },
     ],
   },
-  { label: 'Shop', href: '/shop' },
+  { label: 'Livestock', href: '/shop' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Learn', href: '/learn' },
   { label: 'Service Areas', href: '/service-areas/west-palm-beach' },
@@ -33,7 +32,6 @@ export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false)
   const [activeDropdown, setActiveDropdown] = React.useState<string | null>(null)
   const pathname = usePathname()
-  const { itemCount } = useCart()
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -167,16 +165,6 @@ export function Navbar() {
             <Phone className="h-4 w-4" />
             <span>(561) 388-7262</span>
           </a>
-          <Link href="/shop/cart" aria-label={`Cart, ${itemCount} items`}>
-            <div className="relative text-white/80 hover:text-white transition-colors">
-              <ShoppingCart className="h-5 w-5" />
-              {itemCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-aqua text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                  {itemCount}
-                </span>
-              )}
-            </div>
-          </Link>
           <Button asChild size="sm" variant="gold">
             <Link href="/quote">Free Quote</Link>
           </Button>
@@ -184,16 +172,6 @@ export function Navbar() {
 
         {/* Mobile actions */}
         <div className="flex lg:hidden items-center gap-3">
-          <Link href="/shop/cart" aria-label={`Cart, ${itemCount} items`}>
-            <div className="relative text-white">
-              <ShoppingCart className="h-5 w-5" />
-              {itemCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-aqua text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                  {itemCount}
-                </span>
-              )}
-            </div>
-          </Link>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}

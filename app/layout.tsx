@@ -7,7 +7,6 @@ import { Footer } from '@/components/layout/Footer'
 import { StickyMobileCTA } from '@/components/layout/StickyMobileCTA'
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton'
 import { ExitIntentPopup } from '@/components/layout/ExitIntentPopup'
-import { CartProvider } from '@/components/shop/CartProvider'
 import { Toaster } from '@/components/ui/toaster'
 
 // Geist is Next.js 15+ only — Inter is the closest clean sans-serif for Next.js 14
@@ -186,15 +185,13 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${fraunces.variable} font-sans`}
       >
-        <CartProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <StickyMobileCTA />
-          <WhatsAppButton />
-          <ExitIntentPopup />
-          <Toaster />
-        </CartProvider>
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <StickyMobileCTA />
+        <WhatsAppButton />
+        <ExitIntentPopup />
+        <Toaster />
       </body>
     </html>
   )

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { client } from '@/lib/sanity/client'
-import { ALL_POSTS_QUERY, ALL_PRODUCTS_QUERY } from '@/lib/sanity/queries'
+import { ALL_POSTS_QUERY } from '@/lib/sanity/queries'
 import { SERVICE_AREAS } from '@/lib/service-areas-data'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aquaholicaquariumservices.com'
@@ -18,7 +18,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/services/maintenance`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/services/emergency`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/services/aquascaping`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${SITE_URL}/shop`, lastModified: now, changeFrequency: 'daily', priority: 0.8 },
     { url: `${SITE_URL}/learn`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${SITE_URL}/gallery`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
@@ -45,17 +44,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   } catch {}
 
-  // Dynamic product pages
-  let productRoutes: MetadataRoute.Sitemap = []
-  try {
-    const products = await client.fetch(ALL_PRODUCTS_QUERY)
-    productRoutes = products.map((product: { slug: { current: string } }) => ({
-      url: `${SITE_URL}/shop/${product.slug.current}`,
-      lastModified: now,
-      changeFrequency: 'daily' as const,
-      priority: 0.7,
-    }))
-  } catch {}
-
-  return [...staticRoutes, ...areaRoutes, ...blogRoutes, ...productRoutes]
+  return [...staticRoutes, ...areaRoutes, ...blogRoutes]
 }

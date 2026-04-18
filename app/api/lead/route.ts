@@ -122,8 +122,8 @@ function buildConfirmationEmail(data: LeadData): string {
       </p>
 
       <div style="text-align: center; margin-top: 32px;">
-        <a href="${process.env.NEXT_PUBLIC_SITE_URL}/shop" style="display: inline-block; background: #D4AF37; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
-          Browse Livestock While You Wait →
+        <a href="${process.env.NEXT_PUBLIC_SITE_URL}/account/signup" style="display: inline-block; background: #D4AF37; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
+          Request Livestock Access →
         </a>
       </div>
     </div>

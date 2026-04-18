@@ -10,10 +10,10 @@ const SERVICE_LINKS = [
 ]
 
 const SHOP_LINKS = [
-  { label: 'Corals', href: '/shop?category=corals' },
-  { label: 'Fish', href: '/shop?category=fish' },
-  { label: 'Invertebrates', href: '/shop?category=inverts' },
-  { label: 'Equipment', href: '/shop?category=equipment' },
+  { label: 'Corals (client access)', href: '/shop' },
+  { label: 'Fish (client access)', href: '/shop' },
+  { label: 'Invertebrates (client access)', href: '/shop' },
+  { label: 'Enter access password', href: '/shop-access' },
 ]
 
 const SERVICE_AREAS = [
@@ -127,10 +127,10 @@ export function Footer() {
 
           {/* Shop */}
           <div>
-            <h3 className="font-display font-semibold text-white mb-4 text-base">Shop</h3>
+            <h3 className="font-display font-semibold text-white mb-4 text-base">Livestock</h3>
             <ul className="space-y-2">
               {SHOP_LINKS.map((link) => (
-                <li key={link.href}>
+                <li key={link.href + link.label}>
                   <Link
                     href={link.href}
                     className="text-white/60 hover:text-aqua text-sm transition-colors"
@@ -212,9 +212,6 @@ export function Footer() {
             </Link>
             <Link href="/terms" className="hover:text-white/70 transition-colors">
               Terms of Service
-            </Link>
-            <Link href="/doa-policy" className="hover:text-white/70 transition-colors">
-              DOA Policy
             </Link>
           </div>
         </div>

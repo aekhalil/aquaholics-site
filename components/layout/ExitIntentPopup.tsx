@@ -54,12 +54,29 @@ export function ExitIntentPopup() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       })
+      const data = await res.json().catch(() => ({}))
       if (res.ok) {
-        toast({ title: 'Check your inbox!', description: 'Your free coral care guide is on its way.', variant: 'success' as never })
+        toast({
+          title: 'Check your inbox',
+          description: data.passwordSent
+            ? 'Your livestock access password is on its way.'
+            : "You're on the list — Nick will reach out with access details.",
+          variant: 'success' as never,
+        })
         dismiss()
+      } else {
+        toast({
+          title: 'Could not subscribe',
+          description: data.error ?? 'Please try again.',
+          variant: 'destructive',
+        })
       }
     } catch {
-      toast({ title: 'Something went wrong', description: 'Please try again.', variant: 'destructive' })
+      toast({
+        title: 'Something went wrong',
+        description: 'Please try again.',
+        variant: 'destructive',
+      })
     } finally {
       setLoading(false)
     }
@@ -95,11 +112,11 @@ export function ExitIntentPopup() {
                   <Gift className="h-8 w-8 text-aqua-200" />
                 </div>
                 <h2 className="font-display text-2xl font-bold mb-2">
-                  Wait — Free Coral Care Guide!
+                  Wait — want livestock access?
                 </h2>
                 <p className="text-white/80 text-sm">
-                  Get our 20-page <strong>Beginner&apos;s Reef Keeping Guide</strong> + 10% off your
-                  first livestock order.
+                  Drop your email and we&apos;ll send the <strong>shop access password</strong> plus a
+                  heads-up the next time new corals, fish, or inverts land.
                 </p>
               </div>
 
@@ -121,7 +138,7 @@ export function ExitIntentPopup() {
                     />
                   </div>
                   <Button type="submit" className="w-full" size="lg" disabled={loading}>
-                    {loading ? 'Sending…' : 'Send My Free Guide →'}
+                    {loading ? 'Sending…' : 'Send Me The Password →'}
                   </Button>
                 </form>
                 <button

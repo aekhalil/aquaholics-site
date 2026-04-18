@@ -60,12 +60,12 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="font-display text-2xl font-bold text-navy mb-3">5. Livestock & Shop Purchases</h2>
+            <h2 className="font-display text-2xl font-bold text-navy mb-3">5. Livestock Sales</h2>
             <ul className="list-disc pl-6 space-y-2">
+              <li>Aquaholics is not a retail store and does not ship livestock. All livestock is held locally in Riviera Beach, FL and sold only to approved service clients for local pickup or drop-off during scheduled service visits.</li>
+              <li>A client account is required to view availability. Approval is at our sole discretion.</li>
               <li>All livestock sales are final. We do not accept returns on live animals.</li>
-              <li>A <strong>48-hour DOA (Dead on Arrival) policy</strong> applies — see our full <Link href="/doa-policy" className="text-aqua hover:underline">DOA Policy</Link> for details and claim requirements.</li>
-              <li>We are not responsible for livestock losses resulting from improper water parameters, inadequate equipment, or failure to follow acclimation instructions.</li>
-              <li>Equipment and dry goods may be returned within 14 days if unused, in original packaging, with receipt. Shipping costs are non-refundable.</li>
+              <li>Because livestock is picked up or delivered locally in person, risk of loss transfers to the client at the moment of pickup or delivery. We are not responsible for losses resulting from transport, acclimation, water parameters, or equipment after that point.</li>
               <li>All prices are in USD and subject to change without notice.</li>
             </ul>
           </section>
@@ -157,7 +157,6 @@ export default function TermsPage() {
 
         <div className="mt-12 pt-8 border-t border-gray-100 text-sm text-gray-400 flex flex-wrap gap-4">
           <Link href="/privacy" className="hover:text-navy transition-colors">Privacy Policy</Link>
-          <Link href="/doa-policy" className="hover:text-navy transition-colors">DOA Policy</Link>
           <Link href="/" className="hover:text-navy transition-colors">Back to Home</Link>
         </div>
       </div>

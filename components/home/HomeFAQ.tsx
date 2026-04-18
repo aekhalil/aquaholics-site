@@ -29,9 +29,9 @@ const DEFAULT_FAQS: FAQ[] = [
   },
   {
     _id: '3',
-    question: 'Do you offer a DOA (Dead on Arrival) guarantee for livestock?',
+    question: 'Can I buy livestock from Aquaholics?',
     answer:
-      'Yes — all livestock purchases are covered by our 48-hour DOA policy. If any animal arrives dead or perishes within 48 hours of delivery under normal acclimation conditions, we will issue a full credit toward a replacement. We require a photo of the animal in the sealed bag within 2 hours of delivery to process a claim.',
+      'Aquaholics is not a retail store and does not ship. Nick keeps a small rotating holding system for service clients. Request a client account, and once approved you can see what corals, fish, and inverts are currently available for pickup in Riviera Beach or for drop-off on your next service visit.',
   },
   {
     _id: '4',
@@ -43,7 +43,7 @@ const DEFAULT_FAQS: FAQ[] = [
     _id: '5',
     question: 'Can you set up a tank in a rental property or condo?',
     answer:
-      'Absolutely. We have extensive experience working in condos, apartments, and rental units. We use waterproofing mats, drip trays, and careful plumbing practices to meet HOA requirements. We can also provide documentation of our insurance for building management if required.',
+      'Absolutely. We have extensive experience working in condos, apartments, and rental units. We use waterproofing mats, drip trays, and careful plumbing practices to meet HOA requirements.',
   },
   {
     _id: '6',
