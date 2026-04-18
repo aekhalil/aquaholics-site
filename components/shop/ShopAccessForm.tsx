@@ -10,20 +10,23 @@ export function ShopAccessForm() {
   const params = useSearchParams()
   const redirect = params.get('redirect') || '/shop'
   const [submitting, setSubmitting] = React.useState(false)
+  const [slow, setSlow] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setError(null)
+    setSlow(false)
     setSubmitting(true)
-    const fd = new FormData(e.currentTarget)
-    const password = String(fd.get('password') ?? '')
+
+    // Show "taking longer than usual" message after 5s
+    const slowTimer = setTimeout(() => setSlow(true), 5000)
 
     try {
       const res = await fetch('/api/shop-access', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ password: String(new FormData(e.currentTarget).get('password') ?? '') }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error ?? 'Incorrect password.')
@@ -32,6 +35,9 @@ export function ShopAccessForm() {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong.')
       setSubmitting(false)
+      setSlow(false)
+    } finally {
+      clearTimeout(slowTimer)
     }
   }
 
@@ -52,6 +58,12 @@ export function ShopAccessForm() {
       </div>
 
       {error && <p className="text-sm text-red-500">{error}</p>}
+
+      {slow && !error && (
+        <p className="text-sm text-gray-500">
+          Taking a moment to wake up — hang tight…
+        </p>
+      )}
 
       <Button type="submit" variant="navy" size="lg" disabled={submitting} className="w-full">
         {submitting ? 'Checking…' : 'Enter'}
