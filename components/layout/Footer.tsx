@@ -65,11 +65,11 @@ export function Footer() {
                 (561) 388-7262
               </a>
               <a
-                href="mailto:aquaholicspb@gmail.com"
+                href="mailto:nick@aquaholicspb.com"
                 className="flex items-center gap-2 hover:text-aqua transition-colors"
               >
                 <Mail className="h-4 w-4 text-aqua flex-shrink-0" />
-                aquaholicspb@gmail.com
+                nick@aquaholicspb.com
               </a>
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-aqua flex-shrink-0 mt-0.5" />

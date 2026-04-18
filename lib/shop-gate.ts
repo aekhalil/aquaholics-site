@@ -2,7 +2,14 @@ export const SHOP_COOKIE = 'aquaholics_shop_access'
 export const SHOP_COOKIE_MAX_AGE = 60 * 60 * 24 * 365
 
 function getSalt(): string {
-  return process.env.SHOP_ACCESS_SALT || 'aquaholics-shop-default-salt'
+  const salt = process.env.SHOP_ACCESS_SALT
+  if (salt) return salt
+  // In prod, refusing to start is safer than silently using a public salt —
+  // the cookie hash would be reversible to the livestock password otherwise.
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('SHOP_ACCESS_SALT is required in production')
+  }
+  return 'aquaholics-shop-default-salt'
 }
 
 export async function hashShopToken(password: string): Promise<string> {

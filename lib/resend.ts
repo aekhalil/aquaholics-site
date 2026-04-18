@@ -15,7 +15,7 @@ export const resend = new Proxy({} as Resend, {
 })
 
 export const FROM_EMAIL =
-    process.env.RESEND_FROM_EMAIL ?? 'noreply@aquaholicaquariumservices.com'
+    process.env.RESEND_FROM_EMAIL ?? 'nick@aquaholicspb.com'
 
 export const BUSINESS_EMAIL =
-    process.env.NEXT_PUBLIC_EMAIL ?? 'aquaholicspb@gmail.com'
+    process.env.NEXT_PUBLIC_EMAIL ?? 'nick@aquaholicspb.com'
