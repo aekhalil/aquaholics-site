@@ -4,6 +4,7 @@ import { resend, FROM_EMAIL, BUSINESS_EMAIL } from '@/lib/resend'
 import { client } from '@/lib/sanity/client'
 import { formatPrice } from '@/lib/utils'
 import { escapeHtml, escapeAttr } from '@/lib/html-escape'
+import { reserveLimiter, getClientIp, rateLimitResponse } from '@/lib/rate-limit'
 import {
   SHOP_COOKIE,
   getShopPassword,
@@ -41,6 +42,9 @@ async function isGated(req: NextRequest): Promise<boolean> {
 
 export async function POST(req: NextRequest) {
   try {
+    const { success } = await reserveLimiter.limit(getClientIp(req))
+    if (!success) return rateLimitResponse()
+
     if (!(await isGated(req))) {
       return NextResponse.json({ error: 'Access password required.' }, { status: 401 })
     }

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { stripe } from '@/lib/stripe'
+import { stripeCheckoutLimiter, getClientIp, rateLimitResponse } from '@/lib/rate-limit'
 
 const ALLOWED_TIER_NAMES = ['Essential', 'Professional', 'Premier'] as const
 
@@ -26,6 +27,9 @@ function getAllowedPriceIds(): Set<string> {
 
 export async function POST(req: NextRequest) {
   try {
+    const { success } = await stripeCheckoutLimiter.limit(getClientIp(req))
+    if (!success) return rateLimitResponse()
+
     const body = await req.json()
     const { priceId, tierName } = schema.parse(body)
 

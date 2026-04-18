@@ -1,9 +1,39 @@
 /** @type {import('next').NextConfig} */
 
-// Security headers applied to every route. CSP is intentionally omitted here
-// because Sanity Studio, Stripe.js, and GA all require carefully scoped allowlists —
-// ship that in a follow-up with Report-Only first, then enforce.
+// CSP is shipped in Report-Only mode first. Browsers log violations to the
+// console (and to the `report-to` endpoint if we add one) without blocking.
+// Watch the console across Studio, shop, quote, and checkout flows for a
+// few deploys, add any third-party origins the policy flagged, then flip
+// to the enforcing `Content-Security-Policy` header.
+//
+// Known allowlists below. 'unsafe-inline' on script-src is because the root
+// layout emits inline JSON-LD + (optional) GA bootstrap, and Next hydration
+// uses inline chunks. 'unsafe-eval' is for Sanity Studio. When we enforce,
+// we can scope these to /studio only via a separate header block.
+const cspDirectives = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "manifest-src 'self'",
+  "worker-src 'self' blob:",
+  "frame-ancestors 'self'",
+  "form-action 'self' https://checkout.stripe.com",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com https://cdn.sanity.io",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://*.stripe.com https://www.googletagmanager.com https://*.google-analytics.com",
+  "font-src 'self' data:",
+  "connect-src 'self' https://api.sanity.io https://*.apicdn.sanity.io https://*.sanity.io wss://*.api.sanity.io https://api.stripe.com https://*.stripe.com https://vitals.vercel-insights.com https://*.google-analytics.com https://*.analytics.google.com",
+  "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com",
+  "media-src 'self' blob: https://cdn.sanity.io",
+  'upgrade-insecure-requests',
+].join('; ')
+
+// Security headers applied to every route.
 const securityHeaders = [
+  {
+    key: 'Content-Security-Policy-Report-Only',
+    value: cspDirectives,
+  },
   {
     key: 'Strict-Transport-Security',
     value: 'max-age=63072000; includeSubDomains; preload',

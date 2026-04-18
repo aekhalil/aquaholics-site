@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { resend, FROM_EMAIL, BUSINESS_EMAIL } from '@/lib/resend'
 import { escapeHtml, escapeAttr } from '@/lib/html-escape'
+import { leadLimiter, getClientIp, rateLimitResponse } from '@/lib/rate-limit'
 
 // ── Input validation ─────────────────────────────────────────────────────────
 // lastName/phone/city are optional so the lightweight ContactForm (which only
@@ -150,6 +151,9 @@ function buildConfirmationEmail(data: LeadData): string {
 
 export async function POST(req: NextRequest) {
   try {
+    const { success } = await leadLimiter.limit(getClientIp(req))
+    if (!success) return rateLimitResponse()
+
     // Parse and validate
     const body = await req.json()
     const result = leadSchema.safeParse(body)
