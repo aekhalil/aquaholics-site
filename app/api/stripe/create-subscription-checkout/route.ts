@@ -12,7 +12,19 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const { priceId, tierName } = schema.parse(body)
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+    // Use NEXT_PUBLIC_SITE_URL when configured. In dev we fall back to the
+    // request's own origin so Stripe redirects come back to whichever port
+    // Next is actually running on. Prod must have NEXT_PUBLIC_SITE_URL set —
+    // a localhost redirect after a real payment would be a disaster.
+    const envSiteUrl = process.env.NEXT_PUBLIC_SITE_URL
+    if (!envSiteUrl && process.env.NODE_ENV === 'production') {
+      console.error('Stripe checkout: NEXT_PUBLIC_SITE_URL missing in production')
+      return NextResponse.json(
+        { error: 'Checkout is not configured. Please contact us.' },
+        { status: 500 }
+      )
+    }
+    const siteUrl = envSiteUrl ?? req.nextUrl.origin
 
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',

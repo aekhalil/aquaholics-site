@@ -3,12 +3,16 @@ import { z } from 'zod'
 import { resend, FROM_EMAIL, BUSINESS_EMAIL } from '@/lib/resend'
 
 // ── Input validation ─────────────────────────────────────────────────────────
+// lastName/phone/city are optional so the lightweight ContactForm (which only
+// collects name + email + subject + message) can share this endpoint with the
+// multi-step QuoteForm. Subject is contact-form-only.
 const leadSchema = z.object({
   firstName: z.string().min(1),
-  lastName: z.string().min(1),
+  lastName: z.string().optional(),
   email: z.string().email(),
-  phone: z.string().min(7),
-  city: z.string().min(1),
+  phone: z.string().optional(),
+  city: z.string().optional(),
+  subject: z.string().optional(),
   tankSize: z.string().optional(),
   waterType: z.string().optional(),
   serviceType: z.string().optional(),
@@ -35,7 +39,7 @@ function buildNotificationEmail(data: LeadData): string {
       <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
         <tr style="background: #f3f4f6;">
           <td style="padding: 10px 12px; font-weight: 600; color: #374151; width: 40%;">Name</td>
-          <td style="padding: 10px 12px; color: #111827;">${data.firstName} ${data.lastName}</td>
+          <td style="padding: 10px 12px; color: #111827;">${data.firstName}${data.lastName ? ` ${data.lastName}` : ''}</td>
         </tr>
         <tr>
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Email</td>
@@ -43,12 +47,17 @@ function buildNotificationEmail(data: LeadData): string {
         </tr>
         <tr style="background: #f3f4f6;">
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Phone</td>
-          <td style="padding: 10px 12px;"><a href="tel:${data.phone}" style="color: #00B4D8;">${data.phone}</a></td>
+          <td style="padding: 10px 12px;">${data.phone ? `<a href="tel:${data.phone}" style="color: #00B4D8;">${data.phone}</a>` : '—'}</td>
         </tr>
         <tr>
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">City</td>
-          <td style="padding: 10px 12px;">${data.city}</td>
+          <td style="padding: 10px 12px;">${data.city ?? '—'}</td>
         </tr>
+        ${data.subject ? `
+        <tr style="background: #f3f4f6;">
+          <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Subject</td>
+          <td style="padding: 10px 12px;">${data.subject}</td>
+        </tr>` : ''}
         <tr style="background: #f3f4f6;">
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Tank Size</td>
           <td style="padding: 10px 12px;">${data.tankSize ?? '—'}</td>
@@ -147,16 +156,20 @@ export async function POST(req: NextRequest) {
 
     const data = result.data
 
-    // Send emails in parallel
-    await Promise.allSettled([
-      // 1. Notify the business
+    // Send emails in parallel. The business notification MUST succeed — if it
+    // fails we lose the lead, so we surface a 500 and let the client retry.
+    // The customer confirmation is best-effort.
+    const notifySubject =
+      data.subject ??
+      `🐠 New Quote Request — ${data.firstName}${data.lastName ? ` ${data.lastName}` : ''}${data.city ? ` (${data.city})` : ''}`
+    const [notifyResult, confirmResult] = await Promise.allSettled([
       resend.emails.send({
         from: FROM_EMAIL,
         to: [BUSINESS_EMAIL],
-        subject: `🐠 New Quote Request — ${data.firstName} ${data.lastName} (${data.city})`,
+        replyTo: data.email,
+        subject: notifySubject,
         html: buildNotificationEmail(data),
       }),
-      // 2. Confirm to the customer
       resend.emails.send({
         from: FROM_EMAIL,
         to: [data.email],
@@ -164,6 +177,16 @@ export async function POST(req: NextRequest) {
         html: buildConfirmationEmail(data),
       }),
     ])
+    if (notifyResult.status === 'rejected') {
+      console.error('Lead notification email failed:', notifyResult.reason)
+      return NextResponse.json(
+        { error: 'Could not submit right now. Please call (561) 388-7262.' },
+        { status: 502 }
+      )
+    }
+    if (confirmResult.status === 'rejected') {
+      console.error('Lead confirmation email failed:', confirmResult.reason)
+    }
 
     // Forward to external CRM/webhook if configured
     const webhookUrl = process.env.LEAD_WEBHOOK_URL
