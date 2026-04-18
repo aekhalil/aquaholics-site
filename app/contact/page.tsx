@@ -21,7 +21,7 @@ export default function ContactPage() {
             <div className="space-y-6 mb-10">
               {[
                 { icon: Phone, label: 'Phone', value: '(561) 388-7262', href: 'tel:+15613887262' },
-                { icon: Mail, label: 'Email', value: 'aquaholicspb@gmail.com', href: 'mailto:aquaholicspb@gmail.com' },
+                { icon: Mail, label: 'Email', value: 'nick@aquaholicspb.com', href: 'mailto:nick@aquaholicspb.com' },
                 { icon: MapPin, label: 'Address', value: '3140 Laurel Ridge Circle, Riviera Beach, FL 33410', href: null },
                 { icon: Clock, label: 'Hours', value: 'Mon–Fri 8am–6pm · Sat 9am–4pm · 24/7 Emergency', href: null },
               ].map(({ icon: Icon, label, value, href }) => (

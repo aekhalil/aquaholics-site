@@ -131,7 +131,7 @@ export default function RootLayout({
                 'Premier aquarium installation, maintenance, and livestock sales serving West Palm Beach and all of Palm Beach County.',
               url: SITE_URL,
               telephone: PHONE,
-              email: 'aquaholicspb@gmail.com',
+              email: 'nick@aquaholicspb.com',
               address: {
                 '@type': 'PostalAddress',
                 streetAddress: '3140 Laurel Ridge Circle',

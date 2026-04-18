@@ -26,7 +26,7 @@ export default function PrivacyPage() {
               services in Palm Beach County, Florida. Our contact information:
             </p>
             <ul className="list-none mt-3 space-y-1 text-sm">
-              <li><strong>Email:</strong> <a href="mailto:aquaholicspb@gmail.com" className="text-aqua hover:underline">aquaholicspb@gmail.com</a></li>
+              <li><strong>Email:</strong> <a href="mailto:nick@aquaholicspb.com" className="text-aqua hover:underline">nick@aquaholicspb.com</a></li>
               <li><strong>Phone:</strong> <a href="tel:+15613887262" className="text-aqua hover:underline">(561) 388-7262</a></li>
               <li><strong>Address:</strong> 3140 Laurel Ridge Circle, Riviera Beach, FL 33410</li>
             </ul>
@@ -107,7 +107,7 @@ export default function PrivacyPage() {
             </ul>
             <p className="mt-3">
               To exercise any of these rights, contact us at{' '}
-              <a href="mailto:aquaholicspb@gmail.com" className="text-aqua hover:underline">aquaholicspb@gmail.com</a>.
+              <a href="mailto:nick@aquaholicspb.com" className="text-aqua hover:underline">nick@aquaholicspb.com</a>.
             </p>
           </section>
 
@@ -143,7 +143,7 @@ export default function PrivacyPage() {
               If you have questions or concerns about this Privacy Policy, please contact us:
             </p>
             <ul className="list-none mt-3 space-y-1 text-sm">
-              <li><strong>Email:</strong> <a href="mailto:aquaholicspb@gmail.com" className="text-aqua hover:underline">aquaholicspb@gmail.com</a></li>
+              <li><strong>Email:</strong> <a href="mailto:nick@aquaholicspb.com" className="text-aqua hover:underline">nick@aquaholicspb.com</a></li>
               <li><strong>Phone:</strong> <a href="tel:+15613887262" className="text-aqua hover:underline">(561) 388-7262</a></li>
               <li><strong>Mail:</strong> Aquaholics Aquarium Services LLC, 3140 Laurel Ridge Circle, Riviera Beach, FL 33410</li>
             </ul>
