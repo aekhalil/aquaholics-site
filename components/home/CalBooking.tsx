@@ -1,19 +1,27 @@
 'use client'
 
 import * as React from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Calendar, Clock, CheckCircle } from 'lucide-react'
+import { Calendar, Clock, CheckCircle, Phone, FileText } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+
+const PHONE = process.env.NEXT_PUBLIC_PHONE ?? '+15613887262'
+const PHONE_DISPLAY = '(561) 388-7262'
 
 /**
  * Cal.com embed for free consultation booking.
- * Loads the Cal.com inline embed script client-side only.
+ * Falls back to a phone/quote CTA when Cal.com env vars aren't configured
+ * (handle must be a real cal.com account that resolves — the previous
+ * `aquaholic-aquarium` default 404s).
  */
 export function CalBooking() {
-  const username = process.env.NEXT_PUBLIC_CALCOM_USERNAME ?? 'aquaholic-aquarium'
-  const eventSlug = process.env.NEXT_PUBLIC_CALCOM_EVENT_SLUG ?? 'free-consultation'
+  const username = process.env.NEXT_PUBLIC_CALCOM_USERNAME
+  const eventSlug = process.env.NEXT_PUBLIC_CALCOM_EVENT_SLUG
+  const enabled = process.env.NEXT_PUBLIC_CALCOM_ENABLED === '1' && username && eventSlug
 
   React.useEffect(() => {
-    // Load Cal.com embed script
+    if (!enabled) return
     const script = document.createElement('script')
     script.type = 'text/javascript'
     script.innerHTML = `
@@ -57,7 +65,7 @@ export function CalBooking() {
     return () => {
       document.head.removeChild(script)
     }
-  }, [username, eventSlug])
+  }, [username, eventSlug, enabled])
 
   return (
     <section className="py-24 bg-white" aria-labelledby="booking-heading">
@@ -108,18 +116,52 @@ export function CalBooking() {
             </div>
           </motion.div>
 
-          {/* Right — Cal.com embed */}
+          {/* Right — Cal.com embed, or CTA fallback when Cal.com isn't configured */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="rounded-2xl overflow-hidden border border-gray-100 shadow-lg min-h-[600px]"
           >
-            <div
-              id="cal-booking-embed"
-              className="w-full min-h-[600px]"
-              aria-label="Booking calendar"
-            />
+            {enabled ? (
+              <div
+                id="cal-booking-embed"
+                className="w-full min-h-[600px]"
+                aria-label="Booking calendar"
+              />
+            ) : (
+              <div className="flex flex-col justify-center gap-6 p-10 min-h-[600px] bg-gradient-to-br from-navy to-navy-900 text-white">
+                <div className="inline-flex items-center gap-2 text-aqua text-sm font-semibold">
+                  <Calendar className="h-4 w-4" /> Book your free consultation
+                </div>
+                <h3 className="font-display text-3xl font-bold leading-tight">
+                  Call or request a quote — Nick gets back to every message within one business day.
+                </h3>
+                <p className="text-white/80">
+                  We keep scheduling simple. Reach out the way that works for you and we&apos;ll line
+                  up a 30-minute call to talk through your tank.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 mt-2">
+                  <Button asChild variant="gold" size="lg" className="w-full sm:w-auto">
+                    <a href={`tel:${PHONE}`} className="inline-flex items-center gap-2">
+                      <Phone className="h-4 w-4" /> Call {PHONE_DISPLAY}
+                    </a>
+                  </Button>
+                  <Button asChild variant="outline" size="lg" className="w-full sm:w-auto bg-white/10 border-white/30 text-white hover:bg-white/20 hover:text-white">
+                    <Link href="/quote" className="inline-flex items-center gap-2">
+                      <FileText className="h-4 w-4" /> Request a quote
+                    </Link>
+                  </Button>
+                </div>
+                <p className="text-xs text-white/60 mt-4">
+                  Prefer email? Reach Nick at{' '}
+                  <a href="mailto:nick@aquaholicspb.com" className="underline">
+                    nick@aquaholicspb.com
+                  </a>
+                  .
+                </p>
+              </div>
+            )}
           </motion.div>
         </div>
       </div>
