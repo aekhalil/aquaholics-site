@@ -14,7 +14,7 @@ const BADGES = [
   {
     icon: Building2,
     title: 'Commercial & Residential',
-    subtitle: '10-gallon to 10,000+ gallon builds',
+    subtitle: '20-gallon to 5,000-gallon builds',
     color: 'text-aqua',
     bg: 'bg-aqua/10',
   },
