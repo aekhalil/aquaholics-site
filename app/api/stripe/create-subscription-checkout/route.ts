@@ -12,6 +12,16 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const { priceId, tierName } = schema.parse(body)
 
+    // Don't attempt Stripe calls without a key — produces a clean 503 with a
+    // human message instead of a noisy 500 from the Stripe SDK, and tells the
+    // caller to fall back to phone enrollment.
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return NextResponse.json(
+        { error: 'Online checkout is not yet available. Please call (561) 388-7262 to enroll.' },
+        { status: 503 }
+      )
+    }
+
     // Use NEXT_PUBLIC_SITE_URL when configured. In dev we fall back to the
     // request's own origin so Stripe redirects come back to whichever port
     // Next is actually running on. Prod must have NEXT_PUBLIC_SITE_URL set —

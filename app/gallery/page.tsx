@@ -7,7 +7,7 @@ import { ALL_GALLERY_QUERY } from '@/lib/sanity/queries'
 export const revalidate = 300
 
 export const metadata: Metadata = {
-  title: 'Aquarium Portfolio & Gallery | Aquaholics',
+  title: 'Aquarium Portfolio & Gallery | Aquaholic',
   description: 'Browse our portfolio of custom aquarium installations across Palm Beach County — saltwater reefs, freshwater planted tanks, and commercial displays.',
   alternates: { canonical: '/gallery' },
 }

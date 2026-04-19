@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button'
 import { Phone, Mail, MapPin, Instagram, Facebook, Star } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'About Aquaholics Aquarium Service | Palm Beach County, FL',
+  title: 'About Aquaholic Aquarium Services | Palm Beach County, FL',
   description:
-    'Meet Nick Pantoliano — Palm Beach County reef keeper turned professional. Aquaholics specializes in saltwater aquarium installation, maintenance, and relocation from 20-gallon nanos to 500-gallon custom builds.',
+    'Meet Nick Pantoliano — Palm Beach County reef keeper turned professional. Aquaholic specializes in saltwater aquarium installation, maintenance, and relocation from 20-gallon nanos to 5000-gallon custom builds.',
 }
 
 const SPECIALTIES = [
@@ -21,7 +21,7 @@ const SPECIALTIES = [
 
 const STATS = [
   { value: '20 gal', label: 'Smallest tank we service' },
-  { value: '500 gal', label: 'Largest build completed' },
+  { value: '5000 gal', label: 'Largest build completed' },
   { value: '5★', label: 'Across Google & Facebook' },
   { value: '24/7', label: 'Emergency response line' },
 ]
@@ -45,7 +45,7 @@ export default function AboutPage() {
             We Live and Breathe Saltwater
           </h1>
           <p className="text-white/70 text-xl leading-relaxed">
-            Aquaholics Aquarium Service isn&apos;t a cleaning company that happens to do tanks.
+            Aquaholic Aquarium Services isn&apos;t a cleaning company that happens to do tanks.
             We&apos;re fellow hobbyists who turned a reef obsession into Palm Beach County&apos;s
             most trusted aquarium service.
           </p>
@@ -61,14 +61,14 @@ export default function AboutPage() {
             <div>
               <h2 className="font-display text-4xl font-bold text-navy mb-6">Our Story</h2>
               <p className="text-gray-600 leading-relaxed mb-5">
-                Nick Pantoliano founded Aquaholics Aquarium Service right here in Palm Beach County
+                Nick Pantoliano founded Aquaholic Aquarium Services right here in Palm Beach County
                 after years of building and maintaining his own reef systems. What started as helping
                 friends with their tanks quickly became the go-to service for hobbyists and
                 businesses across Jupiter, Palm Beach Gardens, Lake Worth, and the surrounding area.
               </p>
               <p className="text-gray-600 leading-relaxed mb-5">
                 We specialize in saltwater — the full spectrum. From a 20-gallon nano reef getting
-                its first coral frag to a custom-built 500-gallon showpiece in a luxury home or
+                its first coral frag to a custom-built 5000-gallon showpiece in a luxury home or
                 commercial lobby, every tank gets the same hands-on expertise and genuine care.
               </p>
               <p className="text-gray-600 leading-relaxed mb-8">
@@ -130,7 +130,7 @@ export default function AboutPage() {
               <div className="bg-navy rounded-3xl p-8 flex items-center justify-center">
                 <Image
                   src="/Images/Hero_logo.PNG"
-                  alt="Aquaholics Aquarium Service logo"
+                  alt="Aquaholic Aquarium Services logo"
                   width={180}
                   height={180}
                   className="rounded-2xl object-cover"
@@ -226,7 +226,7 @@ export default function AboutPage() {
           </h2>
           <p className="text-white/60 mb-8 max-w-xl mx-auto">
             We&apos;re active in the same forums, groups, and communities you are. Follow our
-            builds and livestock on Instagram — that&apos;s the tank nerd side of Aquaholics.
+            builds and livestock on Instagram — that&apos;s the tank nerd side of Aquaholic.
           </p>
           <div className="flex flex-wrap justify-center gap-2 mb-8">
             {COMMUNITY_TAGS.map((tag) => (

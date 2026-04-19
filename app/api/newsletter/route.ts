@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: FROM_EMAIL,
       to: [email],
-      subject: '🪸 Your livestock access — Aquaholics',
+      subject: '🪸 Your livestock access — Aquaholic',
       headers: {
         'List-Unsubscribe': `<${unsubLink}>`,
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
             <h1 style="color:#fff;margin:0;font-size:22px;">You're on the livestock list 🐠</h1>
           </div>
           <div style="padding:28px;background:#fff;border-radius:0 0 12px 12px;border:1px solid #e5e7eb;border-top:none;">
-            <p style="margin:0 0 14px;">Thanks for joining. Aquaholics isn't a retail store — Nick keeps a small rotating holding system for service clients and a short list of folks who want first look when new corals, fish, and inverts come in.</p>
+            <p style="margin:0 0 14px;">Thanks for joining. Aquaholic isn't a retail store — Nick keeps a small rotating holding system for service clients and a short list of folks who want first look when new corals, fish, and inverts come in.</p>
             ${passwordBlock}
             <p style="color:#6b7280;font-size:13px;margin:16px 0 6px;">What to expect next:</p>
             <ul style="color:#4b5563;font-size:13px;line-height:1.6;margin:0 0 14px;padding-left:20px;">
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
             </p>
           </div>
           <p style="text-align:center;color:#9ca3af;font-size:11px;margin-top:12px;">
-            Aquaholics Aquarium Services LLC · Riviera Beach, FL<br/>
+            Aquaholic Aquarium Services LLC · Riviera Beach, FL<br/>
             Don't want these? <a href="${unsubLink}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a>.
           </p>
         </div>

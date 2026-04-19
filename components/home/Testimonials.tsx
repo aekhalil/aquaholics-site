@@ -31,7 +31,7 @@ const PLACEHOLDER_TESTIMONIALS: Testimonial[] = [
     name: 'Michael R.',
     location: 'West Palm Beach',
     rating: 5,
-    text: "Aquaholics built our 180-gallon reef from scratch. The attention to detail is insane — the aquascape looks like something out of a magazine. Fourteen months later and every parameter is still dialed in perfectly.",
+    text: "Aquaholic built our 180-gallon reef from scratch. The attention to detail is insane — the aquascape looks like something out of a magazine. Fourteen months later and every parameter is still dialed in perfectly.",
     service: 'Custom Installation',
   },
   {
@@ -39,7 +39,7 @@ const PLACEHOLDER_TESTIMONIALS: Testimonial[] = [
     name: 'Sarah T.',
     location: 'Palm Beach Gardens',
     rating: 5,
-    text: "I've had three different aquarium companies maintain my tanks over the years. Aquaholics is in a completely different league. They actually TELL you what's wrong before it becomes a problem. Worth every penny.",
+    text: "I've had three different aquarium companies maintain my tanks over the years. Aquaholic is in a completely different league. They actually TELL you what's wrong before it becomes a problem. Worth every penny.",
     service: 'Maintenance Plan',
   },
   {
@@ -63,7 +63,7 @@ const PLACEHOLDER_TESTIMONIALS: Testimonial[] = [
     name: 'Amanda L.',
     location: 'Wellington',
     rating: 5,
-    text: "I was comparing maintenance plans and Aquaholics was not the cheapest option. But after seeing my neighbor's tank crash with a 'budget' service, I went with them and I'm so glad I did. These guys know reefs.",
+    text: "I was comparing maintenance plans and Aquaholic was not the cheapest option. But after seeing my neighbor's tank crash with a 'budget' service, I went with them and I'm so glad I did. These guys know reefs.",
     service: 'Maintenance Plan',
   },
   {

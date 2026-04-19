@@ -14,7 +14,7 @@ export function ServiceAreaPage({ area }: ServiceAreaPageProps) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'Aquaholics Aquarium Services LLC',
+    name: 'Aquaholic Aquarium Services LLC',
     description: `Professional aquarium installation, maintenance, and livestock services in ${area.name}, FL and surrounding Palm Beach County.`,
     url: `${siteUrl}/service-areas/${area.slug}`,
     telephone: '+15613887262',

@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const posts = await getPosts()
   const hasRealContent = posts.length > 0
   return {
-    title: 'Aquarium Tips & Guides | Aquaholics Blog',
+    title: 'Aquarium Tips & Guides | Aquaholic Blog',
     description: "Expert aquarium care guides, reef keeping tutorials, fish profiles, and coral care tips from West Palm Beach's premier aquarium specialists.",
     alternates: { canonical: '/learn' },
     robots: hasRealContent
@@ -69,7 +69,7 @@ export default async function LearnPage() {
             Aquarium Education
           </div>
           <h1 className="font-display text-4xl sm:text-5xl font-bold text-navy mb-4">
-            The Aquaholics Blog
+            The Aquaholic Blog
           </h1>
           <p className="text-gray-600 text-lg sm:text-xl max-w-2xl mx-auto">
             Expert guides, care tips, and reef inspiration from West Palm Beach&apos;s most
