@@ -15,6 +15,30 @@ function timingSafeEqual(a: string, b: string): boolean {
   return diff === 0
 }
 
+// Module-scope cache for the hashed expected token. In-memory per worker —
+// Vercel keeps workers warm for minutes, so this turns most /shop/:slug
+// navigations after auth into a ~0ms cookie compare instead of a Sanity
+// round-trip every request. TTL matches the Sanity fetch revalidate (30s)
+// so password rotations in Sanity still kick clients out within ~30s.
+let cachedHash: { hash: string; expires: number } | null = null
+const HASH_TTL_MS = 30_000
+
+async function getExpectedHash(): Promise<string | null> {
+  if (cachedHash && cachedHash.expires > Date.now()) return cachedHash.hash
+  const password = await getShopPassword()
+  if (!password) return null
+  const hash = await hashShopToken(password)
+  cachedHash = { hash, expires: Date.now() + HASH_TTL_MS }
+  return hash
+}
+
+function redirectToGate(req: NextRequest, pathname: string, search: string) {
+  const url = req.nextUrl.clone()
+  url.pathname = '/shop-access'
+  url.search = `?redirect=${encodeURIComponent(pathname + search)}`
+  return NextResponse.redirect(url)
+}
+
 export async function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl
 
@@ -22,20 +46,20 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next()
   }
 
-  const password = await getShopPassword()
   const provided = req.cookies.get(SHOP_COOKIE)?.value
 
-  if (password && provided) {
-    const expected = await hashShopToken(password)
-    if (timingSafeEqual(provided, expected)) {
-      return NextResponse.next()
-    }
+  // Fast path: no cookie means we're definitely redirecting. Skip the Sanity
+  // fetch entirely — saves ~300-800ms for every unauthenticated visitor.
+  if (!provided) {
+    return redirectToGate(req, pathname, search)
   }
 
-  const url = req.nextUrl.clone()
-  url.pathname = '/shop-access'
-  url.search = `?redirect=${encodeURIComponent(pathname + search)}`
-  return NextResponse.redirect(url)
+  const expected = await getExpectedHash()
+  if (expected && timingSafeEqual(provided, expected)) {
+    return NextResponse.next()
+  }
+
+  return redirectToGate(req, pathname, search)
 }
 
 export const config = {
