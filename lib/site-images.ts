@@ -14,14 +14,6 @@ const DEMO = '/Images/demo'
 const PORTFOLIO = '/Images/portfolio'
 
 export const portfolioPhotos = {
-  livingRoomWhiteCabinet: {
-    src: `${PORTFOLIO}/install-living-room-white-cabinet.jpg`,
-    alt: 'Custom Red Sea reef aquarium with white cabinet and diamond pendant light in luxury Palm Beach County living room — Aquaholic Aquarium Services',
-  },
-  acrylicSchoolingFish: {
-    src: `${PORTFOLIO}/install-acrylic-schooling-fish.jpg`,
-    alt: 'Crystal-clear acrylic aquarium with schooling saltwater fish and symmetric aquascape under blue LED lighting — Aquaholic Aquarium Services',
-  },
   barReefBarstools: {
     src: `${PORTFOLIO}/install-bar-reef-barstools.jpg`,
     alt: 'Luxury reef aquarium built into a home bar with barstools, custom installation by Aquaholic Aquarium Services in Palm Beach County',
@@ -45,10 +37,6 @@ export const portfolioPhotos = {
   commercialFishColumn: {
     src: `${PORTFOLIO}/install-commercial-fish-column.jpg`,
     alt: 'Tall commercial column reef aquarium with rock structure and colorful saltwater fish installed in a Palm Beach County restaurant by Aquaholic Aquarium Services',
-  },
-  coralCloseupBranded: {
-    src: `${PORTFOLIO}/coral-closeup-branded.jpg`,
-    alt: 'Vibrant purple, green, and orange coral macro photograph — Aquaholic Aquarium Services reef care',
   },
   coralCloseupBlastomussa: {
     src: `${PORTFOLIO}/coral-closeup-blastomussa-orange.jpg`,
@@ -84,8 +72,13 @@ export type PortfolioPhotoKey = keyof typeof portfolioPhotos
 
 export const siteImages = {
   // ── Homepage hero ───────────────────────────────────────────────────────────
-  // Strongest image in the set — luxury living-room Red Sea build.
-  hero: portfolioPhotos.livingRoomWhiteCabinet,
+  // Original hero — colorful tropical fish on a dark background (restored by
+  // user request). Portfolio install photos appear throughout the rest of the
+  // homepage (BeforeAfterGallery, CommercialSection) and on services pages.
+  hero: {
+    src: `${DEMO}/goldfish.jpg`,
+    alt: 'Colorful saltwater tropical fish against a dark reef background — Aquaholic Aquarium Services, West Palm Beach',
+  },
 
   // ── Blog / Learn articles ───────────────────────────────────────────────────
   learn: {
