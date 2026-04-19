@@ -6,7 +6,7 @@ import { Check, ArrowRight, Building2, Home, Zap, DollarSign } from 'lucide-reac
 export const metadata: Metadata = {
   title: 'Custom Aquarium Installation — Residential & Commercial | Palm Beach County, FL',
   description:
-    'Aquaholics installs custom saltwater aquariums for homes, offices, restaurants, hotels & commercial spaces across Palm Beach County. Red Sea, EcoTech, Neptune, Abyzz, Octo, Innovative Marine. 20-gallon to 1,000+ gallon builds.',
+    'Aquaholic installs custom saltwater aquariums for homes, offices, restaurants, hotels & commercial spaces across Palm Beach County. Red Sea, EcoTech, Neptune, Abyzz, Octo, Innovative Marine. 20-gallon to 1,000+ gallon builds.',
   alternates: { canonical: '/services/installation' },
 }
 

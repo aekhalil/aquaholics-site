@@ -35,7 +35,7 @@ export default async function UnsubscribedPage({
           <p className="text-gray-500 text-sm leading-relaxed mb-6">
             {invalid
               ? "We couldn't verify that unsubscribe link. It may be expired or the email address may not match. Text (561) 388-7262 and we'll remove you manually."
-              : "You won't get any more livestock alerts from Aquaholics. If this was a mistake, text (561) 388-7262 and we'll add you back."}
+              : "You won't get any more livestock alerts from Aquaholic. If this was a mistake, text (561) 388-7262 and we'll add you back."}
           </p>
           <Button asChild variant="outline">
             <Link href="/">Back to home</Link>

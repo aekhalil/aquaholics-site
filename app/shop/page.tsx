@@ -7,7 +7,7 @@ export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Available Livestock — Client Access',
-  description: 'Corals, fish, and invertebrates currently held at Aquaholics in Riviera Beach, FL. Client access only — no shipping.',
+  description: 'Corals, fish, and invertebrates currently held at Aquaholic in Riviera Beach, FL. Client access only — no shipping.',
   robots: { index: false, follow: false },
   alternates: { canonical: '/shop' },
 }

@@ -4,7 +4,7 @@ import { QuoteForm } from '@/components/forms/QuoteForm'
 export const metadata: Metadata = {
   title: 'Get a Free Quote',
   description:
-    'Request a free aquarium quote from Aquaholics Aquarium Services. Custom installations, maintenance plans, and livestock — serving West Palm Beach and all of Palm Beach County.',
+    'Request a free aquarium quote from Aquaholic Aquarium Services. Custom installations, maintenance plans, and livestock — serving West Palm Beach and all of Palm Beach County.',
   alternates: { canonical: '/quote' },
 }
 

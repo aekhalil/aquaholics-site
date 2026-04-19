@@ -69,7 +69,7 @@ export function CommercialSection() {
             <span className="block text-aqua">Bigger Builds.</span>
           </h2>
           <p className="text-white/60 text-xl max-w-2xl mx-auto">
-            From a 50-gallon dental office reef to a 10,000-gallon statement build — Aquaholics
+            From a 50-gallon dental office reef to a 10,000-gallon statement build — Aquaholic
             handles commercial and specialty aquarium projects of any scale across South Florida,
             including bespoke builds for high-end clients and one-of-a-kind installs.
           </p>

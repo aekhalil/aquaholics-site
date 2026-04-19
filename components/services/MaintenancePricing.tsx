@@ -191,7 +191,7 @@ export function MaintenancePricing({ tiers }: MaintenancePricingProps) {
             {/* Professional column */}
             <div className="bg-emerald-50 border border-emerald-100 rounded-3xl p-6 relative">
               <div className="absolute -top-3 left-6 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">Better Value</div>
-              <div className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2">Aquaholics Professional Plan</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2">Aquaholic Professional Plan</div>
               <div className="font-display text-4xl font-bold text-navy mb-5">$249<span className="text-lg font-normal text-gray-400">/mo</span></div>
               <ul className="space-y-3 text-sm text-gray-700">
                 {[

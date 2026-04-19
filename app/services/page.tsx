@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight, Wrench, Waves, AlertCircle, Building2 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Aquarium Services — Installation, Maintenance, Aquascaping & Emergency | Aquaholics',
+  title: 'Aquarium Services — Installation, Maintenance, Aquascaping & Emergency | Aquaholic',
   description:
     'Full-service saltwater and reef aquarium care in Palm Beach County, FL. Custom installation, weekly maintenance plans, professional aquascaping, and 24/7 emergency service.',
   alternates: { canonical: '/services' },

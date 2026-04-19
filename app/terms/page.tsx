@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Aquaholics Aquarium Services',
-  description: 'Terms of Service for Aquaholics Aquarium Services LLC — governing the use of our website, services, and products.',
+  title: 'Terms of Service | Aquaholic Aquarium Services',
+  description: 'Terms of Service for Aquaholic Aquarium Services LLC — governing the use of our website, services, and products.',
   robots: { index: false, follow: false },
 }
 
@@ -22,7 +22,7 @@ export default function TermsPage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">1. Agreement to Terms</h2>
             <p>
               By accessing or using the website at <strong>aquaholicspb.com</strong> or engaging the
-              services of Aquaholics Aquarium Services LLC (&quot;Aquaholics,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), you agree to be
+              services of Aquaholic Aquarium Services LLC (&quot;Aquaholic,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), you agree to be
               bound by these Terms of Service. If you do not agree, please do not use our website or services.
             </p>
           </section>
@@ -30,7 +30,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-display text-2xl font-bold text-navy mb-3">2. Services</h2>
             <p>
-              Aquaholics provides aquarium installation, maintenance, aquascaping, emergency service, and livestock
+              Aquaholic provides aquarium installation, maintenance, aquascaping, emergency service, and livestock
               sales to residential and commercial clients in Palm Beach County, Florida and surrounding areas.
               Specific service terms (scope, pricing, scheduling) are outlined in individual service agreements
               provided at the time of booking.
@@ -62,7 +62,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-display text-2xl font-bold text-navy mb-3">5. Livestock Sales</h2>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Aquaholics is not a retail store and does not ship livestock. All livestock is held locally in Riviera Beach, FL and sold only to approved service clients for local pickup or drop-off during scheduled service visits.</li>
+              <li>Aquaholic is not a retail store and does not ship livestock. All livestock is held locally in Riviera Beach, FL and sold only to approved service clients for local pickup or drop-off during scheduled service visits.</li>
               <li>A client account is required to view availability. Approval is at our sole discretion.</li>
               <li>All livestock sales are final. We do not accept returns on live animals.</li>
               <li>Because livestock is picked up or delivered locally in person, risk of loss transfers to the client at the moment of pickup or delivery. We are not responsible for losses resulting from transport, acclimation, water parameters, or equipment after that point.</li>
@@ -94,7 +94,7 @@ export default function TermsPage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">8. Intellectual Property</h2>
             <p>
               All website content — including text, images, logos, graphics, and code — is the property of
-              Aquaholics Aquarium Services LLC or its licensors. You may not reproduce or distribute any content
+              Aquaholic Aquarium Services LLC or its licensors. You may not reproduce or distribute any content
               without prior written permission.
             </p>
           </section>
@@ -112,7 +112,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-display text-2xl font-bold text-navy mb-3">10. Limitation of Liability</h2>
             <p>
-              To the fullest extent permitted by law, Aquaholics Aquarium Services LLC shall not be liable for
+              To the fullest extent permitted by law, Aquaholic Aquarium Services LLC shall not be liable for
               any indirect, incidental, special, or consequential damages arising from use of our website or
               services. Our total liability for any claim shall not exceed the amount paid by you for the
               specific service giving rise to the claim in the 30 days prior to the incident.
@@ -122,7 +122,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-display text-2xl font-bold text-navy mb-3">11. Indemnification</h2>
             <p>
-              You agree to indemnify and hold harmless Aquaholics Aquarium Services LLC and its principals,
+              You agree to indemnify and hold harmless Aquaholic Aquarium Services LLC and its principals,
               employees, and agents from any claims, damages, or expenses arising from your violation of these
               Terms or misuse of our services.
             </p>

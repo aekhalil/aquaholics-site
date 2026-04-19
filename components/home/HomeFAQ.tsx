@@ -29,9 +29,9 @@ const DEFAULT_FAQS: FAQ[] = [
   },
   {
     _id: '3',
-    question: 'Can I buy livestock from Aquaholics?',
+    question: 'Can I buy livestock from Aquaholic?',
     answer:
-      'Aquaholics is not a retail store and does not ship. Nick keeps a small rotating holding system for service clients. Request a client account, and once approved you can see what corals, fish, and inverts are currently available for pickup in Riviera Beach or for drop-off on your next service visit.',
+      'Aquaholic is not a retail store and does not ship. Nick keeps a small rotating holding system for service clients. Request a client account, and once approved you can see what corals, fish, and inverts are currently available for pickup in Riviera Beach or for drop-off on your next service visit.',
   },
   {
     _id: '4',

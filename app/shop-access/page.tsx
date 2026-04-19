@@ -6,7 +6,7 @@ import { client } from '@/lib/sanity/client'
 
 export const metadata: Metadata = {
   title: 'Livestock Access',
-  description: 'Enter the access password to view available livestock at Aquaholics.',
+  description: 'Enter the access password to view available livestock at Aquaholic.',
   robots: { index: false, follow: false },
 }
 
@@ -35,7 +35,7 @@ export default async function ShopAccessPage() {
           <h1 className="font-display text-3xl font-bold text-navy mb-2">Livestock access</h1>
           <p className="text-gray-500 text-sm mb-6 whitespace-pre-line">
             {message ??
-              `Aquaholics isn't a retail store and doesn't ship. Available livestock is shown only to clients Nick works with. If you don't have the access password, text (561) 388-7262.`}
+              `Aquaholic isn't a retail store and doesn't ship. Available livestock is shown only to clients Nick works with. If you don't have the access password, text (561) 388-7262.`}
           </p>
           <Suspense fallback={null}>
             <ShopAccessForm />

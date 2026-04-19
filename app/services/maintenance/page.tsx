@@ -96,7 +96,7 @@ export default async function MaintenancePage() {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: 'Aquarium Maintenance Service',
-    provider: { '@type': 'LocalBusiness', name: 'Aquaholics Aquarium Services LLC' },
+    provider: { '@type': 'LocalBusiness', name: 'Aquaholic Aquarium Services LLC' },
     areaServed: 'Palm Beach County, FL',
     description:
       'Professional aquarium maintenance including water changes, parameter testing, glass cleaning, and livestock health assessments.',

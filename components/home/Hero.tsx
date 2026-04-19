@@ -140,7 +140,7 @@ export function Hero() {
             <div className="relative rounded-3xl overflow-hidden aspect-[4/5] border border-aqua/20 shadow-2xl shadow-aqua/10">
               <Image
                 src={siteImages.hero}
-                alt="Stunning custom saltwater reef aquarium by Aquaholics"
+                alt="Stunning custom saltwater reef aquarium by Aquaholic"
                 fill
                 className="object-cover"
                 priority

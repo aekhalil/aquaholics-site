@@ -129,7 +129,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
           </div>
 
           <div className="rounded-2xl bg-aqua/5 border border-aqua/20 p-4 text-sm text-navy/80 leading-relaxed mb-8">
-            <strong className="text-navy">Local only.</strong> Aquaholics isn&apos;t an online store
+            <strong className="text-navy">Local only.</strong> Aquaholic isn&apos;t an online store
             and doesn&apos;t ship. Pickup at Nick&apos;s holding system in Riviera Beach, or add it
             to your next service visit.
           </div>

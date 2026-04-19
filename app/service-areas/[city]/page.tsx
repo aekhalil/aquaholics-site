@@ -21,7 +21,7 @@ export async function generateMetadata({
   const area = SERVICE_AREAS.find((a) => a.slug === city)
   if (!area) return { title: 'Not Found' }
 
-  const title = `Aquarium Service in ${area.name}, FL | Aquaholics`
+  const title = `Aquarium Service in ${area.name}, FL | Aquaholic`
   const description = `Professional aquarium installation, maintenance & livestock in ${area.name}, FL. Serving ${area.name} and all of Palm Beach County. Free consultation — call (561) 388-7262.`
 
   return {
