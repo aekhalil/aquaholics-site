@@ -14,8 +14,10 @@ export function Hero() {
       className="relative min-h-screen flex items-center overflow-hidden bg-ocean-gradient"
       aria-label="Hero section"
     >
-      {/* Animated background bubbles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {/* Animated background bubbles — desktop only. On mobile, 8 infinite
+          rAF loops + the blur-3xl radial glow below forced a full-viewport
+          composite every scroll frame on iOS, which caused the stutter. */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block" aria-hidden="true">
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}

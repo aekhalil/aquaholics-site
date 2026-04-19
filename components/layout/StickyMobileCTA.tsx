@@ -10,7 +10,7 @@ import { Phone, MessageSquare } from 'lucide-react'
 export function StickyMobileCTA() {
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-navy/95 backdrop-blur-md border-t border-white/10 safe-bottom"
+      className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-navy border-t border-white/10 safe-bottom"
       role="complementary"
       aria-label="Quick contact"
     >

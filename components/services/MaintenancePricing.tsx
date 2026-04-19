@@ -132,7 +132,7 @@ export function MaintenancePricing({ tiers }: MaintenancePricingProps) {
     <>
       {/* Hero */}
       <section className="bg-ocean-gradient py-24 pt-36 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10" aria-hidden="true">
+        <div className="absolute inset-0 opacity-10 hidden md:block" aria-hidden="true">
           <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-aqua blur-3xl" />
         </div>
         <div className="container mx-auto px-4 lg:px-8 relative text-center">
