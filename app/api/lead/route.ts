@@ -37,7 +37,7 @@ function buildNotificationEmail(data: LeadData): string {
   return `
   <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #f9fafb;">
     <div style="background: #0A1F3D; padding: 24px; border-radius: 12px 12px 0 0;">
-      <h1 style="color: #00B4D8; margin: 0; font-size: 22px;">🐠 New Lead: Aquaholics Quote Form</h1>
+      <h1 style="color: #00B4D8; margin: 0; font-size: 22px;">🐠 New Lead: Aquaholic Quote Form</h1>
       <p style="color: rgba(255,255,255,0.6); margin: 8px 0 0 0; font-size: 14px;">
         Received ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })} ET
       </p>
@@ -144,7 +144,7 @@ function buildConfirmationEmail(data: LeadData): string {
       </div>
     </div>
     <p style="text-align: center; color: #9ca3af; font-size: 12px; margin-top: 16px;">
-      Aquaholics Aquarium Services LLC · 3140 Laurel Ridge Circle, Riviera Beach, FL 33410
+      Aquaholic Aquarium Services LLC · 3140 Laurel Ridge Circle, Riviera Beach, FL 33410
     </p>
   </div>`
 }
@@ -183,7 +183,7 @@ export async function POST(req: NextRequest) {
       resend.emails.send({
         from: FROM_EMAIL,
         to: [data.email],
-        subject: 'Got your request — Aquaholics Aquarium Services',
+        subject: 'Got your request — Aquaholic Aquarium Services',
         html: buildConfirmationEmail(data),
       }),
     ])

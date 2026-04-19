@@ -70,19 +70,18 @@ export function Navbar() {
 
       <nav className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group" aria-label="Aquaholics Home">
+        <Link href="/" className="flex items-center gap-2 group" aria-label="Aquaholic Home">
           <Image
             src="/logo.png"
-            alt="Aquaholics Aquarium Services"
+            alt="Aquaholic Aquarium Services"
             width={44}
             height={44}
             className="rounded-full object-cover"
             priority
           />
           <div className="hidden sm:block">
-            <div className="font-display text-white font-bold text-lg leading-tight">Aquaholics</div>
-            <div className="text-aqua-200 text-[10px] uppercase tracking-widest leading-tight">
-              Aquarium Services
+            <div className="font-display text-white font-bold text-base lg:text-lg leading-tight whitespace-nowrap">
+              Aquaholic Aquarium Services
             </div>
           </div>
         </Link>

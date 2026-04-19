@@ -125,7 +125,7 @@ export function FeaturedLivestock({ products }: FeaturedLivestockProps) {
               Corals, Fish &amp; Inverts — Held for Clients
             </h2>
             <p className="text-gray-500 mt-3 max-w-lg">
-              Aquaholics isn&apos;t a store. Nick keeps a rotating holding system for service
+              Aquaholic isn&apos;t a store. Nick keeps a rotating holding system for service
               clients — preview below, then sign in to see what&apos;s available.
             </p>
           </div>

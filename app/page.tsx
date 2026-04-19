@@ -23,9 +23,9 @@ import { NewsletterBanner } from '@/components/home/NewsletterBanner'
 export const revalidate = 60
 
 export const metadata: Metadata = {
-  title: 'Aquaholics Aquarium Services | #1 Aquarium Service in West Palm Beach, FL',
+  title: 'Aquaholic Aquarium Services | #1 Aquarium Service in West Palm Beach, FL',
   description:
-    'Palm Beach County\'s saltwater specialists. Aquaholics handles installation, maintenance, relocation & coral care — 20-gallon nano reefs to 500-gallon custom builds. Jupiter, WPB, Palm Beach Gardens, Lake Worth & more.',
+    'Palm Beach County\'s saltwater specialists. Aquaholic handles installation, maintenance, relocation & coral care — 20-gallon nano reefs to 5000-gallon custom builds. Jupiter, WPB, Palm Beach Gardens, Lake Worth & more.',
   alternates: {
     canonical: '/',
   },

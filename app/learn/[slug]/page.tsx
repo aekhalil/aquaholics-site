@@ -94,10 +94,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     description: post.excerpt,
     datePublished: post.publishedAt,
     image: post.image,
-    author: { '@type': 'Organization', name: 'Aquaholics Aquarium Services LLC' },
+    author: { '@type': 'Organization', name: 'Aquaholic Aquarium Services LLC' },
     publisher: {
       '@type': 'Organization',
-      name: 'Aquaholics Aquarium Services LLC',
+      name: 'Aquaholic Aquarium Services LLC',
       logo: { '@type': 'ImageObject', url: `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png` },
     },
   }

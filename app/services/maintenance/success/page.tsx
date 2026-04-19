@@ -13,7 +13,7 @@ export default function MaintenanceSuccess() {
           <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
             <Check className="h-10 w-10 text-emerald-500" />
           </div>
-          <h1 className="font-display text-3xl font-bold text-navy mb-3">Welcome to Aquaholics!</h1>
+          <h1 className="font-display text-3xl font-bold text-navy mb-3">Welcome to Aquaholic!</h1>
           <p className="text-gray-500 mb-6">
             Your maintenance plan is confirmed. Our team will contact you within 24 hours to
             schedule your first service visit.

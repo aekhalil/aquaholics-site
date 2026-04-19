@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Aquaholics Aquarium Services',
-  description: 'Privacy Policy for Aquaholics Aquarium Services LLC — how we collect, use, and protect your personal information.',
+  title: 'Privacy Policy | Aquaholic Aquarium Services',
+  description: 'Privacy Policy for Aquaholic Aquarium Services LLC — how we collect, use, and protect your personal information.',
   robots: { index: false, follow: false },
 }
 
@@ -21,7 +21,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-display text-2xl font-bold text-navy mb-3">1. Who We Are</h2>
             <p>
-              Aquaholics Aquarium Services LLC (&quot;Aquaholics,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the website{' '}
+              Aquaholic Aquarium Services LLC (&quot;Aquaholic,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the website{' '}
               <strong>aquaholicspb.com</strong> and provides aquarium installation, maintenance, and livestock
               services in Palm Beach County, Florida. Our contact information:
             </p>
@@ -145,7 +145,7 @@ export default function PrivacyPage() {
             <ul className="list-none mt-3 space-y-1 text-sm">
               <li><strong>Email:</strong> <a href="mailto:nick@aquaholicspb.com" className="text-aqua hover:underline">nick@aquaholicspb.com</a></li>
               <li><strong>Phone:</strong> <a href="tel:+15613887262" className="text-aqua hover:underline">(561) 388-7262</a></li>
-              <li><strong>Mail:</strong> Aquaholics Aquarium Services LLC, 3140 Laurel Ridge Circle, Riviera Beach, FL 33410</li>
+              <li><strong>Mail:</strong> Aquaholic Aquarium Services LLC, 3140 Laurel Ridge Circle, Riviera Beach, FL 33410</li>
             </ul>
           </section>
 

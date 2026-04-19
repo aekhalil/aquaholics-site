@@ -33,11 +33,18 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const { priceId, tierName } = schema.parse(body)
 
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return NextResponse.json(
+        { error: 'Online checkout is not yet available. Please call (561) 388-7262 to enroll.' },
+        { status: 503 }
+      )
+    }
+
     const allowed = getAllowedPriceIds()
     if (allowed.size === 0) {
       console.error('Stripe checkout: no STRIPE_PRICE_* env vars configured')
       return NextResponse.json(
-        { error: 'Checkout is not configured. Please contact us.' },
+        { error: 'Online checkout is not yet available. Please call (561) 388-7262 to enroll.' },
         { status: 503 }
       )
     }

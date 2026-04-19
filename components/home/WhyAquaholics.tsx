@@ -30,7 +30,7 @@ export function WhyAquaholics() {
           className="text-center mb-14"
         >
           <div className="inline-block bg-aqua/10 text-aqua text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-            Why Aquaholics
+            Why Aquaholic
           </div>
           <h2
             id="why-heading"
@@ -55,7 +55,7 @@ export function WhyAquaholics() {
           {/* Table header */}
           <div className="grid grid-cols-[1fr_120px_120px] bg-navy text-white text-sm font-semibold">
             <div className="px-6 py-4">Feature</div>
-            <div className="px-4 py-4 text-center text-aqua">Aquaholics</div>
+            <div className="px-4 py-4 text-center text-aqua">Aquaholic</div>
             <div className="px-4 py-4 text-center text-white/40">The Rest</div>
           </div>
 

@@ -38,14 +38,14 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Image
                 src="/logo.png"
-                alt="Aquaholics Aquarium Services"
+                alt="Aquaholic Aquarium Services"
                 width={44}
                 height={44}
                 className="rounded-full object-cover flex-shrink-0"
               />
               <div>
                 <div className="font-display text-white font-bold text-lg leading-tight">
-                  Aquaholics Aquarium Services
+                  Aquaholic Aquarium Services
                 </div>
                 <div className="text-aqua-300 text-[10px] uppercase tracking-widest">
                   Riviera Beach, FL
@@ -96,7 +96,7 @@ export function Footer() {
                 <Instagram className="h-4 w-4" />
               </a>
               <a
-                href="https://www.google.com/maps/search/Aquaholics+Aquarium+Services+Riviera+Beach+FL"
+                href="https://www.google.com/maps/search/Aquaholic+Aquarium+Services+Riviera+Beach+FL"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="See our Google reviews"
@@ -205,7 +205,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 lg:px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/40">
-          <p>© {new Date().getFullYear()} Aquaholics Aquarium Services LLC. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Aquaholic Aquarium Services LLC. All rights reserved.</p>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:text-white/70 transition-colors">
               Privacy Policy

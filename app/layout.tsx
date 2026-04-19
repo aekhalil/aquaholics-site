@@ -31,8 +31,8 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? ''
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Aquaholics Aquarium Services | West Palm Beach, FL',
-    template: '%s | Aquaholics Aquarium Services',
+    default: 'Aquaholic Aquarium Services | West Palm Beach, FL',
+    template: '%s | Aquaholic Aquarium Services',
   },
   description:
     'Premier aquarium installation, maintenance, and livestock sales in West Palm Beach & Palm Beach County. Custom saltwater & freshwater tanks, coral frags, rare fish, and monthly service contracts.',
@@ -44,14 +44,14 @@ export const metadata: Metadata = {
     'fish tank cleaning service wpb',
     'custom aquarium design palm beach',
   ],
-  authors: [{ name: 'Aquaholics Aquarium Services LLC' }],
-  creator: 'Aquaholics Aquarium Services LLC',
+  authors: [{ name: 'Aquaholic Aquarium Services LLC' }],
+  creator: 'Aquaholic Aquarium Services LLC',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: SITE_URL,
-    siteName: 'Aquaholics Aquarium Services',
-    title: 'Aquaholics Aquarium Services | West Palm Beach, FL',
+    siteName: 'Aquaholic Aquarium Services',
+    title: 'Aquaholic Aquarium Services | West Palm Beach, FL',
     description:
       'Premier aquarium installation, maintenance & livestock sales in Palm Beach County. Custom tanks, coral frags, rare fish & monthly service plans.',
     images: [
@@ -59,13 +59,13 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Aquaholics Aquarium Services — West Palm Beach, FL',
+        alt: 'Aquaholic Aquarium Services — West Palm Beach, FL',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aquaholics Aquarium Services | WPB, FL',
+    title: 'Aquaholic Aquarium Services | WPB, FL',
     description: 'Custom aquariums, coral frags & monthly maintenance in Palm Beach County.',
     images: ['/og-image.jpg'],
   },
@@ -143,7 +143,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'LocalBusiness',
               '@id': `${SITE_URL}/#business`,
-              name: 'Aquaholics Aquarium Services LLC',
+              name: 'Aquaholic Aquarium Services LLC',
               image: `${SITE_URL}/og-image.jpg`,
               description:
                 'Premier aquarium installation, maintenance, and livestock sales serving West Palm Beach and all of Palm Beach County.',

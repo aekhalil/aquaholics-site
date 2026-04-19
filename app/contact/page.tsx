@@ -3,8 +3,8 @@ import { ContactForm } from '@/components/forms/ContactForm'
 import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Contact | Aquaholics Aquarium Services',
-  description: 'Contact Aquaholics Aquarium Services in West Palm Beach, FL. Call (561) 388-7262 or send us a message.',
+  title: 'Contact | Aquaholic Aquarium Services',
+  description: 'Contact Aquaholic Aquarium Services in West Palm Beach, FL. Call (561) 388-7262 or send us a message.',
 }
 
 export default function ContactPage() {
@@ -44,7 +44,7 @@ export default function ContactPage() {
             {/* Map */}
             <div className="rounded-2xl overflow-hidden border border-gray-200 h-56">
               <iframe
-                title="Aquaholics location"
+                title="Aquaholic location"
                 src="https://maps.google.com/maps?q=3140+Laurel+Ridge+Circle,+Riviera+Beach,+FL+33410&output=embed"
                 width="100%"
                 height="100%"
