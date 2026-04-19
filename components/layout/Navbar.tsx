@@ -48,7 +48,7 @@ export function Navbar() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled || !isHome
+        scrolled || !isHome || mobileOpen
           ? 'bg-navy/95 backdrop-blur-md shadow-lg shadow-navy/30'
           : 'bg-transparent'
       )}
