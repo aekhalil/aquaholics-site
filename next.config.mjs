@@ -23,7 +23,7 @@ const cspDirectives = [
   "img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://*.stripe.com https://www.googletagmanager.com https://*.google-analytics.com",
   "font-src 'self' data:",
   "connect-src 'self' https://api.sanity.io https://*.apicdn.sanity.io https://*.sanity.io wss://*.api.sanity.io https://api.stripe.com https://*.stripe.com https://vitals.vercel-insights.com https://*.google-analytics.com https://*.analytics.google.com",
-  "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com",
+  "frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com https://www.google.com https://maps.google.com",
   "media-src 'self' blob: https://cdn.sanity.io",
   'upgrade-insecure-requests',
 ].join('; ')
