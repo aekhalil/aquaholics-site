@@ -35,17 +35,25 @@ export function ExitIntentPopup() {
     const isTouch = window.matchMedia('(pointer: coarse)').matches
 
     if (isTouch) {
+      // rAF-coalesced scroll handler — we only need one layout read per frame,
+      // not per scroll event, otherwise the scrollHeight read jank the scroll.
+      let ticking = false
       const onScroll = () => {
-        const doc = document.documentElement
-        const depth = (window.scrollY + window.innerHeight) / doc.scrollHeight
-        if (depth >= 0.7) trigger()
+        if (ticking) return
+        ticking = true
+        requestAnimationFrame(() => {
+          const doc = document.documentElement
+          const depth = (window.scrollY + window.innerHeight) / doc.scrollHeight
+          if (depth >= 0.6) trigger()
+          ticking = false
+        })
       }
-      // Wait 8s before wiring scroll (avoid firing during initial reading).
+      // Arm scroll listener after 6s so it doesn't fire during initial reading.
       const scrollArm = setTimeout(() => {
         window.addEventListener('scroll', onScroll, { passive: true })
-      }, 8000)
-      // Fallback: 45s dwell without scroll-depth trigger.
-      const dwellTimer = setTimeout(trigger, 45000)
+      }, 6000)
+      // Fallback: 30s dwell without scroll-depth trigger.
+      const dwellTimer = setTimeout(trigger, 30000)
       return () => {
         clearTimeout(scrollArm)
         clearTimeout(dwellTimer)
