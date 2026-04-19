@@ -54,17 +54,21 @@ export function Navbar() {
       )}
     >
       {/* Top announcement bar */}
-      <div className="bg-aqua text-white text-xs text-center py-1.5 px-4 hidden md:block">
-        <span className="font-semibold">🐠 Free Consultation</span> — Call{' '}
+      <div className="bg-aqua text-white text-xs text-center py-1.5 px-4">
+        <span className="hidden md:inline">
+          <span className="font-semibold">🐠 Free Consultation</span> — Call{' '}
+        </span>
         <a
           href={`tel:${process.env.NEXT_PUBLIC_PHONE ?? '+15613887262'}`}
           className="underline font-bold"
         >
           (561) 388-7262
         </a>{' '}
-        or{' '}
+        <span className="md:hidden">· </span>
+        <span className="hidden md:inline">or </span>
         <Link href="/quote" className="underline font-bold">
-          book online →
+          <span className="md:hidden">Free Quote →</span>
+          <span className="hidden md:inline">book online →</span>
         </Link>
       </div>
 
@@ -79,10 +83,8 @@ export function Navbar() {
             className="rounded-full object-cover"
             priority
           />
-          <div className="hidden sm:block">
-            <div className="font-display text-white font-bold text-base lg:text-lg leading-tight whitespace-nowrap">
-              Aquaholic Aquarium Services
-            </div>
+          <div className="font-display text-white font-bold text-sm sm:text-base lg:text-lg leading-tight">
+            Aquaholic Aquarium Services
           </div>
         </Link>
 
@@ -170,7 +172,14 @@ export function Navbar() {
         </div>
 
         {/* Mobile actions */}
-        <div className="flex lg:hidden items-center gap-3">
+        <div className="flex lg:hidden items-center gap-2">
+          <a
+            href={`tel:${process.env.NEXT_PUBLIC_PHONE ?? '+15613887262'}`}
+            className="text-white p-2 -mr-1 rounded-md hover:bg-white/10 transition-colors"
+            aria-label="Call (561) 388-7262"
+          >
+            <Phone className="h-5 w-5" />
+          </a>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
