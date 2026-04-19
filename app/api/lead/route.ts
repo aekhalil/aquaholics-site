@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { resend, FROM_EMAIL, BUSINESS_EMAIL } from '@/lib/resend'
+import { escapeHtml, escapeAttr } from '@/lib/html-escape'
+import { leadLimiter, getClientIp, rateLimitResponse } from '@/lib/rate-limit'
 
 // ── Input validation ─────────────────────────────────────────────────────────
 // lastName/phone/city are optional so the lightweight ContactForm (which only
@@ -27,6 +29,11 @@ type LeadData = z.infer<typeof leadSchema>
 
 // ── HTML email templates ─────────────────────────────────────────────────────
 function buildNotificationEmail(data: LeadData): string {
+  // Every user-supplied field must be HTML-escaped — values land in an email
+  // the business owner opens, so injected anchors / inline content would forge
+  // credible phishing UI inside what looks like our own template.
+  const e = escapeHtml
+  const nameHtml = `${e(data.firstName)}${data.lastName ? ` ${e(data.lastName)}` : ''}`
   return `
   <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #f9fafb;">
     <div style="background: #0A1F3D; padding: 24px; border-radius: 12px 12px 0 0;">
@@ -39,57 +46,57 @@ function buildNotificationEmail(data: LeadData): string {
       <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
         <tr style="background: #f3f4f6;">
           <td style="padding: 10px 12px; font-weight: 600; color: #374151; width: 40%;">Name</td>
-          <td style="padding: 10px 12px; color: #111827;">${data.firstName}${data.lastName ? ` ${data.lastName}` : ''}</td>
+          <td style="padding: 10px 12px; color: #111827;">${nameHtml}</td>
         </tr>
         <tr>
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Email</td>
-          <td style="padding: 10px 12px;"><a href="mailto:${data.email}" style="color: #00B4D8;">${data.email}</a></td>
+          <td style="padding: 10px 12px;"><a href="mailto:${escapeAttr(data.email)}" style="color: #00B4D8;">${e(data.email)}</a></td>
         </tr>
         <tr style="background: #f3f4f6;">
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Phone</td>
-          <td style="padding: 10px 12px;">${data.phone ? `<a href="tel:${data.phone}" style="color: #00B4D8;">${data.phone}</a>` : '—'}</td>
+          <td style="padding: 10px 12px;">${data.phone ? `<a href="tel:${escapeAttr(data.phone)}" style="color: #00B4D8;">${e(data.phone)}</a>` : '—'}</td>
         </tr>
         <tr>
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">City</td>
-          <td style="padding: 10px 12px;">${data.city ?? '—'}</td>
+          <td style="padding: 10px 12px;">${e(data.city) || '—'}</td>
         </tr>
         ${data.subject ? `
         <tr style="background: #f3f4f6;">
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Subject</td>
-          <td style="padding: 10px 12px;">${data.subject}</td>
+          <td style="padding: 10px 12px;">${e(data.subject)}</td>
         </tr>` : ''}
         <tr style="background: #f3f4f6;">
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Tank Size</td>
-          <td style="padding: 10px 12px;">${data.tankSize ?? '—'}</td>
+          <td style="padding: 10px 12px;">${e(data.tankSize) || '—'}</td>
         </tr>
         <tr>
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Water Type</td>
-          <td style="padding: 10px 12px;">${data.waterType ?? '—'}</td>
+          <td style="padding: 10px 12px;">${e(data.waterType) || '—'}</td>
         </tr>
         <tr style="background: #f3f4f6;">
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Service Type</td>
-          <td style="padding: 10px 12px;">${data.serviceType ?? '—'}</td>
+          <td style="padding: 10px 12px;">${e(data.serviceType) || '—'}</td>
         </tr>
         <tr>
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Budget</td>
-          <td style="padding: 10px 12px;">${data.budget ?? '—'}</td>
+          <td style="padding: 10px 12px;">${e(data.budget) || '—'}</td>
         </tr>
         <tr style="background: #f3f4f6;">
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Timeline</td>
-          <td style="padding: 10px 12px;">${data.timeline ?? '—'}</td>
+          <td style="padding: 10px 12px;">${e(data.timeline) || '—'}</td>
         </tr>
         <tr>
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Source</td>
-          <td style="padding: 10px 12px;">${data.source ?? 'website'}</td>
+          <td style="padding: 10px 12px;">${e(data.source) || 'website'}</td>
         </tr>
         <tr style="background: #f3f4f6;">
           <td style="padding: 10px 12px; font-weight: 600; color: #374151;">Heard About Us</td>
-          <td style="padding: 10px 12px;">${data.hearAbout ?? '—'}</td>
+          <td style="padding: 10px 12px;">${e(data.hearAbout) || '—'}</td>
         </tr>
         ${data.message ? `
         <tr>
           <td style="padding: 10px 12px; font-weight: 600; color: #374151; vertical-align: top;">Message</td>
-          <td style="padding: 10px 12px;">${data.message}</td>
+          <td style="padding: 10px 12px; white-space: pre-wrap;">${e(data.message)}</td>
         </tr>` : ''}
       </table>
       <div style="margin-top: 20px; padding: 16px; background: #ecfdf5; border-radius: 8px; border: 1px solid #a7f3d0;">
@@ -106,12 +113,12 @@ function buildConfirmationEmail(data: LeadData): string {
       <div style="font-size: 48px; margin-bottom: 16px;">🐠</div>
       <h1 style="color: white; margin: 0; font-size: 28px;">We've Got Your Request!</h1>
       <p style="color: rgba(255,255,255,0.7); margin: 12px 0 0 0; font-size: 16px;">
-        Thanks, ${data.firstName}. We'll be in touch within 24 hours.
+        Thanks, ${escapeHtml(data.firstName)}. We'll be in touch within 24 hours.
       </p>
     </div>
     <div style="background: white; padding: 32px; border-radius: 0 0 12px 12px; border: 1px solid #e5e7eb; border-top: none;">
       <p style="color: #4b5563; font-size: 15px; line-height: 1.6;">
-        Our team is reviewing your request for <strong>${data.serviceType ?? 'aquarium services'}</strong>
+        Our team is reviewing your request for <strong>${escapeHtml(data.serviceType) || 'aquarium services'}</strong>
         and will prepare a personalised proposal for you.
       </p>
 
@@ -144,6 +151,9 @@ function buildConfirmationEmail(data: LeadData): string {
 
 export async function POST(req: NextRequest) {
   try {
+    const { success } = await leadLimiter.limit(getClientIp(req))
+    if (!success) return rateLimitResponse()
+
     // Parse and validate
     const body = await req.json()
     const result = leadSchema.safeParse(body)

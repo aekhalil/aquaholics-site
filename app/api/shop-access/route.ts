@@ -6,6 +6,7 @@ import {
   getShopPassword,
   hashShopToken,
 } from '@/lib/shop-gate'
+import { shopAccessLimiter, getClientIp, rateLimitResponse } from '@/lib/rate-limit'
 
 export const runtime = 'nodejs'
 
@@ -15,6 +16,9 @@ const schema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
+    const { success } = await shopAccessLimiter.limit(getClientIp(req))
+    if (!success) return rateLimitResponse()
+
     const body = await req.json()
     const parsed = schema.safeParse(body)
     if (!parsed.success) {

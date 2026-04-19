@@ -3,6 +3,8 @@ import { z } from 'zod'
 import { resend, FROM_EMAIL, BUSINESS_EMAIL } from '@/lib/resend'
 import { client } from '@/lib/sanity/client'
 import { formatPrice } from '@/lib/utils'
+import { escapeHtml, escapeAttr } from '@/lib/html-escape'
+import { reserveLimiter, getClientIp, rateLimitResponse } from '@/lib/rate-limit'
 import {
   SHOP_COOKIE,
   getShopPassword,
@@ -20,17 +22,29 @@ const schema = z.object({
   message: z.string().max(1000).optional(),
 })
 
+function timingSafeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false
+  let diff = 0
+  for (let i = 0; i < a.length; i++) {
+    diff |= a.charCodeAt(i) ^ b.charCodeAt(i)
+  }
+  return diff === 0
+}
+
 async function isGated(req: NextRequest): Promise<boolean> {
   const provided = req.cookies.get(SHOP_COOKIE)?.value
   if (!provided) return false
   const password = await getShopPassword()
   if (!password) return false
   const expected = await hashShopToken(password)
-  return provided === expected
+  return timingSafeEqual(provided, expected)
 }
 
 export async function POST(req: NextRequest) {
   try {
+    const { success } = await reserveLimiter.limit(getClientIp(req))
+    if (!success) return rateLimitResponse()
+
     if (!(await isGated(req))) {
       return NextResponse.json({ error: 'Access password required.' }, { status: 401 })
     }
@@ -57,7 +71,6 @@ export async function POST(req: NextRequest) {
     }
 
     const subject = `🦐 Livestock hold — ${product.name} × ${quantity} (${name})`
-    const escape = (s: string) => s.replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
     const sends = [
       resend.emails.send({
@@ -68,15 +81,15 @@ export async function POST(req: NextRequest) {
         html: `
           <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:20px;">
             <h2 style="color:#0A1F3D;margin:0 0 16px;">New livestock hold request</h2>
-            <p style="margin:0 0 12px;"><strong>${escape(name)}</strong> wants you to hold:</p>
+            <p style="margin:0 0 12px;"><strong>${escapeHtml(name)}</strong> wants you to hold:</p>
             <div style="background:#f3f4f6;border-radius:8px;padding:14px 16px;margin:12px 0;">
-              <div style="font-size:16px;color:#0A1F3D;font-weight:600;">${escape(product.name)}</div>
-              <div style="color:#6b7280;font-size:13px;margin-top:4px;">${escape(product.category)} · ${quantity} × ${formatPrice(product.price)}</div>
+              <div style="font-size:16px;color:#0A1F3D;font-weight:600;">${escapeHtml(product.name)}</div>
+              <div style="color:#6b7280;font-size:13px;margin-top:4px;">${escapeHtml(product.category)} · ${quantity} × ${formatPrice(product.price)}</div>
             </div>
             <table style="width:100%;border-collapse:collapse;font-size:14px;">
-              <tr><td style="padding:6px 10px;background:#f9fafb;"><strong>Phone</strong></td><td style="padding:6px 10px;"><a href="tel:${escape(phone)}">${escape(phone)}</a></td></tr>
-              ${email ? `<tr><td style="padding:6px 10px;background:#f9fafb;"><strong>Email</strong></td><td style="padding:6px 10px;"><a href="mailto:${escape(email)}">${escape(email)}</a></td></tr>` : ''}
-              ${message ? `<tr><td style="padding:6px 10px;background:#f9fafb;vertical-align:top;"><strong>Note</strong></td><td style="padding:6px 10px;">${escape(message)}</td></tr>` : ''}
+              <tr><td style="padding:6px 10px;background:#f9fafb;"><strong>Phone</strong></td><td style="padding:6px 10px;"><a href="tel:${escapeAttr(phone)}">${escapeHtml(phone)}</a></td></tr>
+              ${email ? `<tr><td style="padding:6px 10px;background:#f9fafb;"><strong>Email</strong></td><td style="padding:6px 10px;"><a href="mailto:${escapeAttr(email)}">${escapeHtml(email)}</a></td></tr>` : ''}
+              ${message ? `<tr><td style="padding:6px 10px;background:#f9fafb;vertical-align:top;"><strong>Note</strong></td><td style="padding:6px 10px;white-space:pre-wrap;">${escapeHtml(message)}</td></tr>` : ''}
             </table>
             <p style="color:#6b7280;font-size:13px;margin-top:16px;">Reply to this email${email ? '' : ' or call back'} to confirm pickup or a service-visit drop-off. No charge has been placed — follow up directly.</p>
           </div>
@@ -92,10 +105,10 @@ export async function POST(req: NextRequest) {
           subject: `We got your hold request — ${product.name}`,
           html: `
             <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:20px;">
-              <h2 style="color:#0A1F3D;">Thanks, ${escape(name.split(' ')[0] ?? name)}.</h2>
+              <h2 style="color:#0A1F3D;">Thanks, ${escapeHtml(name.split(' ')[0] ?? name)}.</h2>
               <p>Nick has been notified and will reach out to confirm pricing and arrange pickup or delivery on your next service visit.</p>
               <div style="background:#f3f4f6;border-radius:8px;padding:14px 16px;margin:12px 0;">
-                <div style="font-size:16px;color:#0A1F3D;font-weight:600;">${escape(product.name)}</div>
+                <div style="font-size:16px;color:#0A1F3D;font-weight:600;">${escapeHtml(product.name)}</div>
                 <div style="color:#6b7280;font-size:13px;margin-top:4px;">${quantity} × ${formatPrice(product.price)}</div>
               </div>
               <p style="color:#6b7280;font-size:13px;">If you don't hear back within a business day, call or text (561) 388-7262.</p>

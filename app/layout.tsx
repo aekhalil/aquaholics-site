@@ -9,6 +9,7 @@ import { WhatsAppButton } from '@/components/layout/WhatsAppButton'
 import { ExitIntentPopup } from '@/components/layout/ExitIntentPopup'
 import { Toaster } from '@/components/ui/toaster'
 import { Analytics } from '@vercel/analytics/next'
+import { ServiceWorkerRegister } from '@/components/layout/ServiceWorkerRegister'
 
 // Geist is Next.js 15+ only — Inter is the closest clean sans-serif for Next.js 14
 const inter = Inter({
@@ -82,6 +83,22 @@ export const metadata: Metadata = {
   verification: {
     // Add Google Search Console verification token here
     // google: 'your-verification-token',
+  },
+  applicationName: 'Aquaholics',
+  appleWebApp: {
+    capable: true,
+    title: 'Aquaholics',
+    statusBarStyle: 'black-translucent',
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  icons: {
+    icon: [
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
   },
 }
 
@@ -194,6 +211,7 @@ export default function RootLayout({
         <ExitIntentPopup />
         <Toaster />
         <Analytics />
+        <ServiceWorkerRegister />
       </body>
     </html>
   )

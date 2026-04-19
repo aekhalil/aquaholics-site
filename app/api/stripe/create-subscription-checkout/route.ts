@@ -1,25 +1,55 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { stripe } from '@/lib/stripe'
+import { stripeCheckoutLimiter, getClientIp, rateLimitResponse } from '@/lib/rate-limit'
+
+const ALLOWED_TIER_NAMES = ['Essential', 'Professional', 'Premier'] as const
 
 const schema = z.object({
   priceId: z.string().min(1, 'Price ID required'),
-  tierName: z.string().optional(),
+  tierName: z.enum(ALLOWED_TIER_NAMES).optional(),
 })
+
+// Only accept price IDs we ourselves configured via env. Without this, an
+// attacker could POST any arbitrary Stripe price ID (from another merchant's
+// public product, a zero-amount test price, etc.) and get a valid Checkout
+// URL hosted under our Stripe account — useful for scams that redirect
+// victims through our domain.
+function getAllowedPriceIds(): Set<string> {
+  return new Set(
+    [
+      process.env.STRIPE_PRICE_ESSENTIAL,
+      process.env.STRIPE_PRICE_PROFESSIONAL,
+      process.env.STRIPE_PRICE_PREMIER,
+    ].filter((v): v is string => typeof v === 'string' && v.length > 0)
+  )
+}
 
 export async function POST(req: NextRequest) {
   try {
+    const { success } = await stripeCheckoutLimiter.limit(getClientIp(req))
+    if (!success) return rateLimitResponse()
+
     const body = await req.json()
     const { priceId, tierName } = schema.parse(body)
 
-    // Don't attempt Stripe calls without a key — produces a clean 503 with a
-    // human message instead of a noisy 500 from the Stripe SDK, and tells the
-    // caller to fall back to phone enrollment.
     if (!process.env.STRIPE_SECRET_KEY) {
       return NextResponse.json(
         { error: 'Online checkout is not yet available. Please call (561) 388-7262 to enroll.' },
         { status: 503 }
       )
+    }
+
+    const allowed = getAllowedPriceIds()
+    if (allowed.size === 0) {
+      console.error('Stripe checkout: no STRIPE_PRICE_* env vars configured')
+      return NextResponse.json(
+        { error: 'Online checkout is not yet available. Please call (561) 388-7262 to enroll.' },
+        { status: 503 }
+      )
+    }
+    if (!allowed.has(priceId)) {
+      return NextResponse.json({ error: 'Invalid plan selected.' }, { status: 400 })
     }
 
     // Use NEXT_PUBLIC_SITE_URL when configured. In dev we fall back to the

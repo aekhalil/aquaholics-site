@@ -3,6 +3,8 @@ import { z } from 'zod'
 import { resend, FROM_EMAIL } from '@/lib/resend'
 import { getShopPassword } from '@/lib/shop-gate'
 import { generateUnsubscribeToken, unsubscribeUrl } from '@/lib/newsletter'
+import { escapeHtml } from '@/lib/html-escape'
+import { newsletterLimiter, getClientIp, rateLimitResponse } from '@/lib/rate-limit'
 
 export const runtime = 'nodejs'
 
@@ -10,6 +12,9 @@ const schema = z.object({ email: z.string().email() })
 
 export async function POST(req: NextRequest) {
   try {
+    const { success } = await newsletterLimiter.limit(getClientIp(req))
+    if (!success) return rateLimitResponse()
+
     const body = await req.json()
     const parsed = schema.safeParse(body)
     if (!parsed.success) {
@@ -36,7 +41,7 @@ export async function POST(req: NextRequest) {
         <p style="margin:0 0 12px;">Your access password for available livestock:</p>
         <div style="background:#0A1F3D;color:#fff;border-radius:10px;padding:18px;text-align:center;margin:12px 0 20px;">
           <div style="font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:#00B4D8;margin-bottom:6px;">Password</div>
-          <div style="font-family:monospace;font-size:22px;font-weight:700;letter-spacing:0.05em;">${password.replace(/</g, '&lt;')}</div>
+          <div style="font-family:monospace;font-size:22px;font-weight:700;letter-spacing:0.05em;">${escapeHtml(password)}</div>
         </div>
         <div style="text-align:center;margin:20px 0 28px;">
           <a href="${siteUrl}/shop-access" style="background:#00B4D8;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;">
