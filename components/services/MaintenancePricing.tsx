@@ -12,12 +12,14 @@ interface PricingTier {
   _id: string
   name: string
   price: number // cents
+  priceSuffix?: string // e.g. "+" or "–$1,000" for tiers with a range
   billingCycle: string
   tagline: string
   features: string[]
   isPopular: boolean
   stripePriceId: string
   callToAction: string
+  quoteHref?: string // if set, CTA links to quote form instead of Stripe checkout
 }
 
 interface MaintenancePricingProps {
@@ -86,10 +88,13 @@ function PricingCard({ tier, index }: { tier: PricingTier; index: number }) {
         <div className="flex items-end gap-1 mb-1">
           <span className="font-display text-5xl font-bold text-navy">
             {formatPrice(tier.price)}
+            {tier.priceSuffix ? <span className="text-3xl">{tier.priceSuffix}</span> : null}
           </span>
           <span className="text-gray-400 text-sm mb-2">/{tier.billingCycle ?? 'month'}</span>
         </div>
-        <p className="text-gray-400 text-xs">Cancel anytime · No setup fees</p>
+        <p className="text-gray-400 text-xs">
+          {tier.quoteHref ? 'Custom quote · Scales with tank size' : 'Cancel anytime · No setup fees'}
+        </p>
       </div>
 
       {/* Features */}
@@ -103,25 +108,39 @@ function PricingCard({ tier, index }: { tier: PricingTier; index: number }) {
           ))}
         </ul>
 
-        <Button
-          onClick={handleSubscribe}
-          disabled={loading}
-          variant={tier.isPopular ? 'default' : 'navy'}
-          size="lg"
-          className="w-full"
-        >
-          {loading ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Redirecting…
-            </>
-          ) : (
-            <>
+        {tier.quoteHref ? (
+          <Button
+            asChild
+            variant={tier.isPopular ? 'default' : 'navy'}
+            size="lg"
+            className="w-full"
+          >
+            <Link href={tier.quoteHref}>
               {tier.callToAction}
               <ArrowRight className="h-4 w-4" />
-            </>
-          )}
-        </Button>
+            </Link>
+          </Button>
+        ) : (
+          <Button
+            onClick={handleSubscribe}
+            disabled={loading}
+            variant={tier.isPopular ? 'default' : 'navy'}
+            size="lg"
+            className="w-full"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Redirecting…
+              </>
+            ) : (
+              <>
+                {tier.callToAction}
+                <ArrowRight className="h-4 w-4" />
+              </>
+            )}
+          </Button>
+        )}
       </div>
     </motion.div>
   )
@@ -161,7 +180,7 @@ export function MaintenancePricing({ tiers }: MaintenancePricingProps) {
           <div className="text-center mb-10">
             <h2 className="font-display text-3xl font-bold text-navy">The Real Cost of DIY</h2>
             <p className="text-gray-500 mt-2 max-w-lg mx-auto text-sm">
-              Most tank owners underestimate what they spend. Here&apos;s what a typical 100-gallon reef
+              Most tank owners underestimate what they spend. Here&apos;s what a typical 75-gallon reef
               actually costs to maintain yourself — vs. letting us handle it.
             </p>
           </div>
@@ -191,15 +210,15 @@ export function MaintenancePricing({ tiers }: MaintenancePricingProps) {
             {/* Professional column */}
             <div className="bg-emerald-50 border border-emerald-100 rounded-3xl p-6 relative">
               <div className="absolute -top-3 left-6 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">Better Value</div>
-              <div className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2">Aquaholic Professional Plan</div>
-              <div className="font-display text-4xl font-bold text-navy mb-5">$249<span className="text-lg font-normal text-gray-400">/mo</span></div>
+              <div className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2">Aquaholic Essential Plan</div>
+              <div className="font-display text-4xl font-bold text-navy mb-5">$200<span className="text-lg font-normal text-gray-400">/mo</span></div>
               <ul className="space-y-3 text-sm text-gray-700">
                 {[
-                  'Weekly visits by a certified tech',
+                  'Twice-monthly visits by a certified tech',
                   'All water, salt & chemicals included',
-                  'Full 14-parameter testing every visit',
-                  'Glass, sump & equipment cleaning',
-                  'Photo report after every visit',
+                  '8-parameter testing every visit',
+                  'Glass & equipment cleaning',
+                  'Monthly health report with photos',
                   '20% off emergency calls',
                   'Peace of mind — we watch your tank',
                 ].map((item) => (

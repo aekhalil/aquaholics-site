@@ -46,11 +46,26 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    /* Navy background on <html> so if iOS briefly evicts a composited layer's
+       backing during scroll, the exposed color matches the navbar/hero
+       instead of flashing pure white. */
+    background-color: theme('colors.navy.DEFAULT');
   }
   body {
     @apply bg-background text-foreground antialiased;
     -webkit-tap-highlight-color: transparent;
-    overflow-x: hidden;
+    /* `overflow-x: clip` avoids the iOS compositor thrash that `overflow-x:
+       hidden` triggers on <body> (hidden creates a scroll/stacking context
+       that Safari re-rasterizes on every scroll frame — the #1 cause of the
+       full-viewport white flicker while scrolling on iPhone).
+       Note: we cannot use `transform: translateZ(0)` or `will-change` on
+       <body> to force a stable GPU layer — those create a new containing
+       block for `position: fixed` descendants and would break the fixed
+       Navbar + StickyMobileCTA + WhatsApp button. `backface-visibility` is
+       safe (does not create a containing block for fixed). */
+    overflow-x: clip;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
   }
   h1, h2, h3, h4 {
     @apply font-display;

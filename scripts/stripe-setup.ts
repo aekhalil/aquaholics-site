@@ -17,20 +17,20 @@ const PLANS = [
   {
     envKey: 'STRIPE_PRICE_ESSENTIAL',
     name: 'Essential Maintenance Plan',
-    description: 'Bi-weekly aquarium maintenance for tanks up to 50 gallons. Includes water change, parameter testing, and glass cleaning.',
-    price: 14900, // $149.00/mo
+    description: 'Twice-monthly (bi-weekly) aquarium maintenance for tanks up to 75 gallons. Includes water change, parameter testing, and glass cleaning.',
+    price: 20000, // $200.00/mo
   },
   {
     envKey: 'STRIPE_PRICE_PROFESSIONAL',
     name: 'Professional Maintenance Plan',
-    description: 'Weekly aquarium maintenance for tanks up to 150 gallons. Full service including livestock health assessment and bi-weekly photo report.',
-    price: 24900, // $249.00/mo
+    description: 'Weekly aquarium maintenance for tanks up to 300 gallons. Full service including livestock health assessment and bi-weekly photo report.',
+    price: 60000, // $600.00/mo
   },
   {
     envKey: 'STRIPE_PRICE_PREMIER',
     name: 'Premier Maintenance Plan',
-    description: 'White-glove weekly maintenance for unlimited tank size. Dedicated technician, full parameter suite, and annual aquascape refresh.',
-    price: 44900, // $449.00/mo
+    description: 'Weekly commercial & large-system maintenance for tanks up to 1,000 gallons+. Starting at $600/mo, scaling to $1,000/mo for larger commercial installations. Dedicated technician, full parameter suite, ICP testing, and annual aquascape refresh.',
+    price: 60000, // $600.00/mo starting; scales to $100000 for commercial
   },
 ]
 

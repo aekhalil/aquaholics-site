@@ -1,9 +1,11 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Building2, Utensils, Heart, Home, Hotel, Briefcase, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { portfolioPhotos } from '@/lib/site-images'
 
 const COMMERCIAL_TYPES = [
   {
@@ -69,10 +71,39 @@ export function CommercialSection() {
             <span className="block text-aqua">Bigger Builds.</span>
           </h2>
           <p className="text-white/60 text-xl max-w-2xl mx-auto">
-            From a 50-gallon dental office reef to a 5,000-gallon statement build — Aquaholic
+            From a 50-gallon dental office reef to a 1,000-gallon+ statement build — Aquaholic
             handles commercial and specialty aquarium projects of any scale across South Florida,
             including bespoke builds for high-end clients and one-of-a-kind installs.
           </p>
+        </motion.div>
+
+        {/* Featured commercial install — restaurant bamboo + lionfish build */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative max-w-5xl mx-auto mb-16 rounded-3xl overflow-hidden border border-aqua/20 shadow-2xl shadow-aqua/10 aspect-[16/9]"
+        >
+          <Image
+            src={portfolioPhotos.restaurantBambooLionfish.src}
+            alt={portfolioPhotos.restaurantBambooLionfish.alt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/10 to-transparent" />
+          <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8">
+            <span className="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-widest text-aqua bg-aqua/10 border border-aqua/30 rounded-full px-3 py-1 mb-3">
+              Featured Commercial Build
+            </span>
+            <h3 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight">
+              Restaurant Reef with Bamboo &amp; Lionfish
+            </h3>
+            <p className="text-white/70 text-sm sm:text-base mt-2 max-w-xl">
+              A fully integrated bench-tank install with bamboo stalks and lionfish — the kind of
+              one-of-a-kind commercial feature that turns a restaurant into a destination.
+            </p>
+          </div>
         </motion.div>
 
         {/* Grid */}

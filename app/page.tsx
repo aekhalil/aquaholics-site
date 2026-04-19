@@ -25,7 +25,7 @@ export const revalidate = 60
 export const metadata: Metadata = {
   title: 'Aquaholic Aquarium Services | #1 Aquarium Service in West Palm Beach, FL',
   description:
-    'Palm Beach County\'s saltwater specialists. Aquaholic handles installation, maintenance, relocation & coral care — 20-gallon nano reefs to 5000-gallon custom builds. Jupiter, WPB, Palm Beach Gardens, Lake Worth & more.',
+    'Palm Beach County\'s saltwater specialists. Aquaholic handles installation, maintenance, relocation & coral care — 20-gallon nano reefs to 1,000-gallon+ custom builds. Jupiter, WPB, Palm Beach Gardens, Lake Worth & more.',
   alternates: {
     canonical: '/',
   },

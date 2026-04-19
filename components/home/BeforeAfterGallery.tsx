@@ -7,6 +7,8 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
+import { portfolioPhotos } from '@/lib/site-images'
+
 interface GalleryProject {
   _id: string
   title: string
@@ -15,19 +17,22 @@ interface GalleryProject {
   location: string
   tankSize?: string
   coverImage?: { asset: { url: string; metadata?: { lqip?: string } } }
+  alt?: string
 }
 
 interface BeforeAfterGalleryProps {
   projects: GalleryProject[]
 }
 
+const toCover = (photo: { src: string }) => ({ asset: { url: photo.src } })
+
 const PLACEHOLDER_PROJECTS: GalleryProject[] = [
-  { _id: '1', title: '200g Mixed Reef — West Palm Beach', slug: { current: '200g-mixed-reef-wpb' }, category: 'saltwater', location: 'West Palm Beach', tankSize: '200 gallons' },
-  { _id: '2', title: 'Office Reef Wall — Palm Beach Gardens', slug: { current: 'office-reef-wall-pbg' }, category: 'commercial', location: 'Palm Beach Gardens', tankSize: '450 gallons' },
-  { _id: '3', title: 'Freshwater Planted Scape — Boca Raton', slug: { current: 'freshwater-planted-boca' }, category: 'freshwater', location: 'Boca Raton', tankSize: '90 gallons' },
-  { _id: '4', title: 'SPS Dominant Reef — Jupiter', slug: { current: 'sps-reef-jupiter' }, category: 'saltwater', location: 'Jupiter', tankSize: '150 gallons' },
-  { _id: '5', title: 'Lobby Jellyfish Display — WPB Hotel', slug: { current: 'lobby-jellyfish-hotel' }, category: 'commercial', location: 'West Palm Beach', tankSize: '120 gallons' },
-  { _id: '6', title: 'Peninsula Tank — Wellington Estate', slug: { current: 'peninsula-tank-wellington' }, category: 'saltwater', location: 'Wellington', tankSize: '300 gallons' },
+  { _id: '1', title: 'Established Mixed Reef — Palm Beach County', slug: { current: 'established-mixed-reef' }, category: 'saltwater', location: 'Palm Beach County', tankSize: '150 gallons', coverImage: toCover(portfolioPhotos.colorfulReefFish), alt: portfolioPhotos.colorfulReefFish.alt },
+  { _id: '2', title: 'Law Office Red Sea Reef — West Palm Beach', slug: { current: 'law-office-red-sea-reef' }, category: 'commercial', location: 'West Palm Beach', tankSize: '250 gallons', coverImage: toCover(portfolioPhotos.officeRedSeaReef), alt: portfolioPhotos.officeRedSeaReef.alt },
+  { _id: '3', title: 'Modern Cube Build — Luxury Living Room', slug: { current: 'modern-cube-living-room' }, category: 'residential', location: 'Palm Beach County', tankSize: '90 gallons', coverImage: toCover(portfolioPhotos.cubeModernLivingRoom), alt: portfolioPhotos.cubeModernLivingRoom.alt },
+  { _id: '4', title: 'Home Bar Reef Display — Palm Beach County', slug: { current: 'home-bar-reef-barstools' }, category: 'residential', location: 'Palm Beach County', tankSize: '180 gallons', coverImage: toCover(portfolioPhotos.barReefBarstools), alt: portfolioPhotos.barReefBarstools.alt },
+  { _id: '5', title: 'Restaurant Bamboo & Lionfish Build', slug: { current: 'restaurant-bamboo-lionfish' }, category: 'commercial', location: 'Palm Beach County', tankSize: '300 gallons', coverImage: toCover(portfolioPhotos.restaurantBambooLionfish), alt: portfolioPhotos.restaurantBambooLionfish.alt },
+  { _id: '6', title: 'Acrylic Schooling Fish Display', slug: { current: 'acrylic-schooling-fish' }, category: 'saltwater', location: 'Palm Beach County', tankSize: '220 gallons', coverImage: toCover(portfolioPhotos.acrylicSchoolingFish), alt: portfolioPhotos.acrylicSchoolingFish.alt },
 ]
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -95,7 +100,7 @@ export function BeforeAfterGallery({ projects }: BeforeAfterGalleryProps) {
                 {project.coverImage ? (
                   <Image
                     src={project.coverImage.asset.url}
-                    alt={project.title}
+                    alt={project.alt ?? project.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

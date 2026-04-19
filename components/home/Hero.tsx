@@ -14,10 +14,16 @@ export function Hero() {
       className="relative min-h-screen flex items-center overflow-hidden bg-ocean-gradient"
       aria-label="Hero section"
     >
-      {/* Animated background bubbles — desktop only. On mobile, 8 infinite
-          rAF loops + the blur-3xl radial glow below forced a full-viewport
-          composite every scroll frame on iOS, which caused the stutter. */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block" aria-hidden="true">
+      {/* Animated bubbles — now shown on mobile too. Isolated to its own
+          compositor layer via `isolate` + `contain: paint` so the infinite
+          animations don't force the fixed navbar / rest of the hero to
+          repaint on every frame. The heavy blur-3xl radial glow stays
+          desktop-only — that was the single largest per-frame paint cost
+          on iOS (blurs a 800px radius every scroll frame). */}
+      <div
+        className="absolute inset-0 overflow-hidden pointer-events-none isolate [contain:paint]"
+        aria-hidden="true"
+      >
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
@@ -27,6 +33,7 @@ export function Hero() {
               height: `${40 + i * 20}px`,
               left: `${10 + i * 11}%`,
               bottom: `-${40 + i * 20}px`,
+              transform: 'translateZ(0)',
             }}
             animate={{
               y: [0, -(600 + i * 100)],
@@ -40,8 +47,8 @@ export function Hero() {
             }}
           />
         ))}
-        {/* Radial glow */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-aqua/5 blur-3xl" />
+        {/* Radial glow — desktop only (blur-3xl is the expensive part) */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-aqua/5 blur-3xl hidden md:block" />
       </div>
 
       {/* Content */}
@@ -84,7 +91,7 @@ export function Hero() {
               className="text-white/75 text-xl leading-relaxed mb-8 max-w-lg"
             >
               Residential and commercial aquarium installation, monthly maintenance, and rare
-              coral frags — from 20-gallon nano tanks to 5,000-gallon showpiece builds, using
+              coral frags — from 20-gallon nano tanks to 1,000-gallon+ showpiece builds, using
               Red Sea, EcoTech, Neptune, Abyzz &amp; Octo by someone who genuinely loves the reef.
             </motion.p>
 
@@ -116,7 +123,7 @@ export function Hero() {
               className="flex flex-wrap gap-6"
             >
               {[
-                { value: '20→5k', label: 'Gallon Range' },
+                { value: '20→1k+', label: 'Gallon Range' },
                 { value: '5★', label: 'Google Rating' },
                 { value: 'WPB→Boca', label: 'Service Area' },
                 { value: '24/7', label: 'Emergency Line' },
@@ -141,8 +148,8 @@ export function Hero() {
             {/* Hero aquarium image */}
             <div className="relative rounded-3xl overflow-hidden aspect-[4/5] border border-aqua/20 shadow-2xl shadow-aqua/10">
               <Image
-                src={siteImages.hero}
-                alt="Stunning custom saltwater reef aquarium by Aquaholic"
+                src={siteImages.hero.src}
+                alt={siteImages.hero.alt}
                 fill
                 className="object-cover"
                 priority

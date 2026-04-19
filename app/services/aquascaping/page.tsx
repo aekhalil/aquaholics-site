@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import { portfolioPhotos } from '@/lib/site-images'
 
 export const metadata: Metadata = {
   title: 'Aquascaping & Tank Design | Palm Beach County',
@@ -25,6 +27,31 @@ export default function AquascapingPage() {
         </div>
       </section>
 
+      {/* Featured aquascape */}
+      <section className="py-14 bg-white">
+        <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              portfolioPhotos.greenOrangeReefBlue,
+              portfolioPhotos.reefMixedAcropora,
+            ].map((photo) => (
+              <div
+                key={photo.src}
+                className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-gray-100 shadow-md"
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -45,7 +72,17 @@ export default function AquascapingPage() {
                 <Link href="/gallery?filter=aquascaping">View Our Work →</Link>
               </Button>
             </div>
-            <div className="bg-gray-50 rounded-3xl p-8">
+            <div className="relative rounded-3xl overflow-hidden aspect-[4/3] border border-gray-100 shadow-md">
+              <Image
+                src={portfolioPhotos.reefCubeNanoColorful.src}
+                alt={portfolioPhotos.reefCubeNanoColorful.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+          <div className="mt-12 bg-gray-50 rounded-3xl p-8 max-w-2xl mx-auto">
               <h3 className="font-semibold text-navy mb-6 text-xl">What&apos;s Included</h3>
               {['In-person consultation & tank assessment', 'Custom 3D aquascape mockup', 'Premium rock or driftwood work', 'Substrate placement & leveling', 'Initial plant or coral placement', 'Flow & lighting optimization', '30-day settling review visit'].map((item) => (
                 <div key={item} className="flex items-center gap-3 py-2.5 border-b border-gray-100 last:border-0 text-sm text-gray-700">
@@ -58,7 +95,6 @@ export default function AquascapingPage() {
               </Button>
             </div>
           </div>
-        </div>
       </section>
     </main>
   )

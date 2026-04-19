@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Check, ArrowRight, Building2, Home, Zap, DollarSign } from 'lucide-react'
+import { portfolioPhotos } from '@/lib/site-images'
 
 export const metadata: Metadata = {
   title: 'Custom Aquarium Installation — Residential & Commercial | Palm Beach County, FL',
@@ -99,6 +101,37 @@ export default function InstallationPage() {
           <svg viewBox="0 0 1440 60" fill="none" className="w-full" preserveAspectRatio="none">
             <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,38 1440,30 L1440,60 L0,60 Z" fill="white" />
           </svg>
+        </div>
+      </section>
+
+      {/* Showcase strip — real builds */}
+      <section className="py-14 bg-white">
+        <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { photo: portfolioPhotos.officeRedSeaReef, caption: 'Law office — Red Sea reef' },
+              { photo: portfolioPhotos.barReefBarstools, caption: 'Home bar reef display' },
+              { photo: portfolioPhotos.cubeModernLivingRoom, caption: 'Modern living-room cube' },
+              { photo: portfolioPhotos.commercialFishColumn, caption: 'Commercial column tank' },
+            ].map(({ photo, caption }) => (
+              <div
+                key={photo.src}
+                className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-gray-100 shadow-sm group"
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 text-white text-xs font-medium drop-shadow">
+                  {caption}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

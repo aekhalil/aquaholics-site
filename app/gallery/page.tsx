@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { client } from '@/lib/sanity/client'
 import { ALL_GALLERY_QUERY } from '@/lib/sanity/queries'
+import { portfolioPhotos } from '@/lib/site-images'
 
 export const revalidate = 300
 
@@ -16,19 +17,42 @@ async function getProjects() {
   try { return await client.fetch(ALL_GALLERY_QUERY) } catch { return [] }
 }
 
-const PLACEHOLDER = [
-  { _id: '1', title: '200g Mixed Reef — West Palm Beach', slug: { current: 'reef-wpb' }, category: 'saltwater', location: 'West Palm Beach', tankSize: '200 gallons', coverImage: null },
-  { _id: '2', title: 'Office Reef Wall — Palm Beach Gardens', slug: { current: 'office-pbg' }, category: 'commercial', location: 'Palm Beach Gardens', tankSize: '450 gallons', coverImage: null },
-  { _id: '3', title: 'Planted Scape — Boca Raton', slug: { current: 'planted-boca' }, category: 'freshwater', location: 'Boca Raton', tankSize: '90 gallons', coverImage: null },
-  { _id: '4', title: 'SPS Reef — Jupiter', slug: { current: 'sps-jupiter' }, category: 'saltwater', location: 'Jupiter', tankSize: '150 gallons', coverImage: null },
-  { _id: '5', title: 'Lobby Jellyfish — WPB Hotel', slug: { current: 'jellyfish-hotel' }, category: 'commercial', location: 'West Palm Beach', tankSize: '120 gallons', coverImage: null },
-  { _id: '6', title: 'Peninsula Reef — Wellington Estate', slug: { current: 'peninsula-wellington' }, category: 'saltwater', location: 'Wellington', tankSize: '300 gallons', coverImage: null },
+type GalleryItem = {
+  _id: string
+  title: string
+  slug: { current: string }
+  category: string
+  location: string
+  tankSize: string
+  coverImage: { asset: { url: string } } | null
+  alt?: string
+}
+
+const toCover = (photo: { src: string }) => ({ asset: { url: photo.src } })
+
+const PLACEHOLDER: GalleryItem[] = [
+  { _id: '1', title: 'Luxury Living Room Red Sea Build', slug: { current: 'living-room-white-cabinet' }, category: 'residential', location: 'Palm Beach County', tankSize: '250 gallons', coverImage: toCover(portfolioPhotos.livingRoomWhiteCabinet), alt: portfolioPhotos.livingRoomWhiteCabinet.alt },
+  { _id: '2', title: 'Acrylic Schooling Fish Display', slug: { current: 'acrylic-schooling-fish' }, category: 'saltwater', location: 'Palm Beach County', tankSize: '220 gallons', coverImage: toCover(portfolioPhotos.acrylicSchoolingFish), alt: portfolioPhotos.acrylicSchoolingFish.alt },
+  { _id: '3', title: 'Home Bar Reef Display', slug: { current: 'home-bar-reef-barstools' }, category: 'residential', location: 'Palm Beach County', tankSize: '180 gallons', coverImage: toCover(portfolioPhotos.barReefBarstools), alt: portfolioPhotos.barReefBarstools.alt },
+  { _id: '4', title: 'Law Office Red Sea Reef', slug: { current: 'law-office-red-sea-reef' }, category: 'commercial', location: 'West Palm Beach', tankSize: '250 gallons', coverImage: toCover(portfolioPhotos.officeRedSeaReef), alt: portfolioPhotos.officeRedSeaReef.alt },
+  { _id: '5', title: 'Vibrant Green & Orange Reef', slug: { current: 'green-orange-reef-blue' }, category: 'saltwater', location: 'Palm Beach County', tankSize: '120 gallons', coverImage: toCover(portfolioPhotos.greenOrangeReefBlue), alt: portfolioPhotos.greenOrangeReefBlue.alt },
+  { _id: '6', title: 'Established Mixed Reef', slug: { current: 'established-mixed-reef' }, category: 'saltwater', location: 'Palm Beach County', tankSize: '150 gallons', coverImage: toCover(portfolioPhotos.colorfulReefFish), alt: portfolioPhotos.colorfulReefFish.alt },
+  { _id: '7', title: 'Restaurant Bamboo & Lionfish Build', slug: { current: 'restaurant-bamboo-lionfish' }, category: 'commercial', location: 'Palm Beach County', tankSize: '300 gallons', coverImage: toCover(portfolioPhotos.restaurantBambooLionfish), alt: portfolioPhotos.restaurantBambooLionfish.alt },
+  { _id: '8', title: 'Commercial Column Display Tank', slug: { current: 'commercial-fish-column' }, category: 'commercial', location: 'Palm Beach County', tankSize: '200 gallons', coverImage: toCover(portfolioPhotos.commercialFishColumn), alt: portfolioPhotos.commercialFishColumn.alt },
+  { _id: '9', title: 'Modern Living Room Cube', slug: { current: 'modern-living-room-cube' }, category: 'residential', location: 'Palm Beach County', tankSize: '90 gallons', coverImage: toCover(portfolioPhotos.cubeModernLivingRoom), alt: portfolioPhotos.cubeModernLivingRoom.alt },
+  { _id: '10', title: 'Red Sea New Install — Pendant Lights', slug: { current: 'red-sea-pendant-lights' }, category: 'residential', location: 'Palm Beach County', tankSize: '175 gallons', coverImage: toCover(portfolioPhotos.redSeaPendantLights), alt: portfolioPhotos.redSeaPendantLights.alt },
+  { _id: '11', title: 'Classic Oak Cabinet Build', slug: { current: 'oak-cabinet-classic' }, category: 'saltwater', location: 'Palm Beach County', tankSize: '120 gallons', coverImage: toCover(portfolioPhotos.oakCabinetClassic), alt: portfolioPhotos.oakCabinetClassic.alt },
+  { _id: '12', title: 'Mixed Acropora SPS Reef', slug: { current: 'mixed-acropora-reef' }, category: 'saltwater', location: 'Palm Beach County', tankSize: '110 gallons', coverImage: toCover(portfolioPhotos.reefMixedAcropora), alt: portfolioPhotos.reefMixedAcropora.alt },
+  { _id: '13', title: 'Colorful Nano Cube Reef', slug: { current: 'nano-cube-reef' }, category: 'saltwater', location: 'Palm Beach County', tankSize: '30 gallons', coverImage: toCover(portfolioPhotos.reefCubeNanoColorful), alt: portfolioPhotos.reefCubeNanoColorful.alt },
+  { _id: '14', title: 'Blastomussa Coral Close-Up', slug: { current: 'blastomussa-closeup' }, category: 'saltwater', location: 'Palm Beach County', tankSize: 'Coral detail', coverImage: toCover(portfolioPhotos.coralCloseupBlastomussa), alt: portfolioPhotos.coralCloseupBlastomussa.alt },
+  { _id: '15', title: 'Outdoor Koi Pond Build', slug: { current: 'outdoor-koi-pond' }, category: 'freshwater', location: 'Palm Beach County', tankSize: 'Custom pond', coverImage: toCover(portfolioPhotos.outdoorKoiPond), alt: portfolioPhotos.outdoorKoiPond.alt },
 ]
 
 const CAT_COLORS: Record<string, string> = {
   saltwater: 'bg-blue-100 text-blue-700',
   freshwater: 'bg-emerald-100 text-emerald-700',
   commercial: 'bg-purple-100 text-purple-700',
+  residential: 'bg-gold/20 text-gold-600',
 }
 
 export default async function GalleryPage() {
@@ -45,7 +69,7 @@ export default async function GalleryPage() {
           </p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {display.map((project: typeof PLACEHOLDER[0]) => (
+          {display.map((project: GalleryItem) => (
             <div
               key={project._id}
               className="group relative aspect-[4/3] rounded-3xl overflow-hidden bg-navy/20 shadow-sm hover:shadow-xl transition-all duration-300"
@@ -53,7 +77,7 @@ export default async function GalleryPage() {
               {project.coverImage ? (
                 <Image
                   src={(project.coverImage as { asset: { url: string } }).asset.url}
-                  alt={project.title}
+                  alt={project.alt ?? project.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

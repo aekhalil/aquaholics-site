@@ -59,8 +59,8 @@ export const ALL_SERVICES_QUERY = groq`
 // ── Pricing Tiers ─────────────────────────────────────────────────────────────
 export const MAINTENANCE_TIERS_QUERY = groq`
   *[_type == "pricingTier"] | order(order asc) {
-    _id, name, price, billingCycle, tagline, features, isPopular,
-    stripePriceId, callToAction
+    _id, name, price, priceSuffix, billingCycle, tagline, features, isPopular,
+    stripePriceId, callToAction, quoteHref
   }
 `
 

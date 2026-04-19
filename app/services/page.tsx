@@ -23,7 +23,7 @@ const SERVICES = [
     title: 'Maintenance Plans',
     href: '/services/maintenance',
     desc: 'Weekly, bi-weekly, and monthly service plans. Water changes, filter cleaning, testing, and livestock health checks.',
-    tagline: 'From $180/month',
+    tagline: 'From $200/month',
   },
   {
     icon: Waves,
