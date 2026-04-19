@@ -25,7 +25,7 @@ const DEFAULT_FAQS: FAQ[] = [
     _id: '2',
     question: 'How much does aquarium maintenance cost?',
     answer:
-      'Our maintenance plans start at $149/month for tanks up to 50 gallons (bi-weekly visits). Most residential clients pay $199–$299/month for weekly service on 75–200 gallon systems. Commercial and very large tanks (300+ gallons) are priced on a custom basis. Every plan includes water changes, parameter testing, glass cleaning, and equipment checks.',
+      'Our Essential plan starts at $200/month (twice-monthly visits) for smaller systems. Most residential clients on our Professional plan pay $600/month for weekly service. Commercial and large-system Premier plans range from $600–$1,000/month depending on tank size, with custom pricing for installations above 1,000 gallons. Every plan includes water changes, parameter testing, glass cleaning, and equipment checks.',
   },
   {
     _id: '3',

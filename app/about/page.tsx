@@ -3,11 +3,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Phone, Mail, MapPin, Instagram, Facebook, Star } from 'lucide-react'
+import { portfolioPhotos } from '@/lib/site-images'
 
 export const metadata: Metadata = {
   title: 'About Aquaholic Aquarium Services | Palm Beach County, FL',
   description:
-    'Meet Nick Pantoliano — Palm Beach County reef keeper turned professional. Aquaholic specializes in saltwater aquarium installation, maintenance, and relocation from 20-gallon nanos to 5000-gallon custom builds.',
+    'Meet Nick Pantoliano — Palm Beach County reef keeper turned professional. Aquaholic specializes in saltwater aquarium installation, maintenance, and relocation from 20-gallon nanos to 1,000-gallon+ custom builds.',
 }
 
 const SPECIALTIES = [
@@ -21,7 +22,7 @@ const SPECIALTIES = [
 
 const STATS = [
   { value: '20 gal', label: 'Smallest tank we service' },
-  { value: '5000 gal', label: 'Largest build completed' },
+  { value: '1,000 gal+', label: 'Largest build completed' },
   { value: '5★', label: 'Across Google & Facebook' },
   { value: '24/7', label: 'Emergency response line' },
 ]
@@ -68,7 +69,7 @@ export default function AboutPage() {
               </p>
               <p className="text-gray-600 leading-relaxed mb-5">
                 We specialize in saltwater — the full spectrum. From a 20-gallon nano reef getting
-                its first coral frag to a custom-built 5000-gallon showpiece in a luxury home or
+                its first coral frag to a custom-built 1,000-gallon showpiece in a luxury home or
                 commercial lobby, every tank gets the same hands-on expertise and genuine care.
               </p>
               <p className="text-gray-600 leading-relaxed mb-8">
@@ -124,17 +125,26 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Right — logo + stats */}
+            {/* Right — featured build + stats */}
             <div className="flex flex-col gap-6">
-              {/* Logo card */}
-              <div className="bg-navy rounded-3xl p-8 flex items-center justify-center">
+              {/* Featured portfolio photo */}
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/3] border border-gray-100 shadow-lg">
                 <Image
-                  src="/logo.png"
-                  alt="Aquaholic Aquarium Services logo"
-                  width={180}
-                  height={180}
-                  className="rounded-2xl object-cover"
+                  src={portfolioPhotos.livingRoomWhiteCabinet.src}
+                  alt={portfolioPhotos.livingRoomWhiteCabinet.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-aqua bg-white/10 backdrop-blur border border-white/20 rounded-full px-3 py-1 inline-block mb-2">
+                    Recent Build
+                  </div>
+                  <p className="text-white font-semibold text-sm drop-shadow">
+                    Luxury living-room Red Sea reef — Palm Beach County
+                  </p>
+                </div>
               </div>
 
               {/* Stats */}

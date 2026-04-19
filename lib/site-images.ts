@@ -1,19 +1,91 @@
 /**
- * Single source of truth for demo/placeholder imagery.
+ * Single source of truth for site imagery.
  *
- * All photos live locally under Public/Images/demo/ and are sourced from
- * Wikipedia Commons (CC-licensed, species-labeled). Every path below is
- * unique to one surface — no photo is reused across hero / learn / shop /
- * brands. The one intentional overlap is the mandarin dragonet photo, which
- * appears in both the shop product and the learn article about that species
- * (because it IS that species).
+ * - `portfolio` → real Aquaholic install photos in /Images/portfolio/ (use for
+ *   hero, gallery, about, services surfaces). Each entry carries alt text so
+ *   every consumer uses the same SEO-friendly description.
+ * - `shop` / `learn` / `brands` → species and product photos under /Images/demo/.
+ *   These are legitimate species-labeled or manufacturer product shots and are
+ *   intentionally kept: replacing a specific coral/fish SKU photo with an
+ *   unrelated install photo would be misleading.
  */
 
 const DEMO = '/Images/demo'
+const PORTFOLIO = '/Images/portfolio'
+
+export const portfolioPhotos = {
+  livingRoomWhiteCabinet: {
+    src: `${PORTFOLIO}/install-living-room-white-cabinet.jpg`,
+    alt: 'Custom Red Sea reef aquarium with white cabinet and diamond pendant light in luxury Palm Beach County living room — Aquaholic Aquarium Services',
+  },
+  acrylicSchoolingFish: {
+    src: `${PORTFOLIO}/install-acrylic-schooling-fish.jpg`,
+    alt: 'Crystal-clear acrylic aquarium with schooling saltwater fish and symmetric aquascape under blue LED lighting — Aquaholic Aquarium Services',
+  },
+  barReefBarstools: {
+    src: `${PORTFOLIO}/install-bar-reef-barstools.jpg`,
+    alt: 'Luxury reef aquarium built into a home bar with barstools, custom installation by Aquaholic Aquarium Services in Palm Beach County',
+  },
+  officeRedSeaReef: {
+    src: `${PORTFOLIO}/install-office-red-sea-reef.jpg`,
+    alt: 'Large Red Sea reef aquarium with full coral and fish installed in a Palm Beach County law office by Aquaholic Aquarium Services',
+  },
+  greenOrangeReefBlue: {
+    src: `${PORTFOLIO}/install-green-orange-reef-blue.jpg`,
+    alt: 'Vibrant green and orange coral reef aquascape under blue LED lighting with reef art backdrop — custom build by Aquaholic Aquarium Services',
+  },
+  colorfulReefFish: {
+    src: `${PORTFOLIO}/install-colorful-reef-fish.jpg`,
+    alt: 'Established saltwater reef aquarium with dense coral and colorful fish — mature reef build maintained by Aquaholic Aquarium Services',
+  },
+  restaurantBambooLionfish: {
+    src: `${PORTFOLIO}/install-restaurant-bamboo-lionfish.jpg`,
+    alt: 'Commercial restaurant reef aquarium built into a wall bench with bamboo stalks and lionfish — custom commercial install by Aquaholic Aquarium Services',
+  },
+  commercialFishColumn: {
+    src: `${PORTFOLIO}/install-commercial-fish-column.jpg`,
+    alt: 'Tall commercial column reef aquarium with rock structure and colorful saltwater fish installed in a Palm Beach County restaurant by Aquaholic Aquarium Services',
+  },
+  coralCloseupBranded: {
+    src: `${PORTFOLIO}/coral-closeup-branded.jpg`,
+    alt: 'Vibrant purple, green, and orange coral macro photograph — Aquaholic Aquarium Services reef care',
+  },
+  coralCloseupBlastomussa: {
+    src: `${PORTFOLIO}/coral-closeup-blastomussa-orange.jpg`,
+    alt: 'Orange Blastomussa coral macro close-up — livestock cared for by Aquaholic Aquarium Services',
+  },
+  reefMixedAcropora: {
+    src: `${PORTFOLIO}/reef-mixed-acropora-colorful.jpg`,
+    alt: 'Mixed saltwater reef aquascape with acropora, mushrooms, and diverse corals — built by Aquaholic Aquarium Services',
+  },
+  reefCubeNanoColorful: {
+    src: `${PORTFOLIO}/reef-cube-nano-colorful.jpg`,
+    alt: 'Colorful nano cube reef aquarium — small tank build by Aquaholic Aquarium Services in Palm Beach County',
+  },
+  cubeModernLivingRoom: {
+    src: `${PORTFOLIO}/install-cube-modern-living-room.jpg`,
+    alt: 'Modern cube reef aquarium with pendant light in open-plan Palm Beach County home — minimalist install by Aquaholic Aquarium Services',
+  },
+  redSeaPendantLights: {
+    src: `${PORTFOLIO}/install-red-sea-pendant-lights.jpg`,
+    alt: 'New Red Sea reef aquarium installation with three black pendant lights, white cabinet, and early-stage coral — Aquaholic Aquarium Services',
+  },
+  oakCabinetClassic: {
+    src: `${PORTFOLIO}/install-oak-cabinet-classic.jpg`,
+    alt: 'Classic large saltwater aquarium with oak cabinet — traditional build by Aquaholic Aquarium Services in Palm Beach County',
+  },
+  outdoorKoiPond: {
+    src: `${PORTFOLIO}/install-outdoor-koi-pond.jpg`,
+    alt: 'Outdoor koi pond with stone surround and bench — custom pond build by Aquaholic Aquarium Services in Palm Beach County',
+  },
+} as const
+
+export type PortfolioPhotoKey = keyof typeof portfolioPhotos
 
 export const siteImages = {
   // ── Homepage hero ───────────────────────────────────────────────────────────
-  hero: `${DEMO}/goldfish.jpg`,
+  // Strongest image in the set — luxury living-room Red Sea build.
+  hero: portfolioPhotos.livingRoomWhiteCabinet,
 
   // ── Blog / Learn articles ───────────────────────────────────────────────────
   learn: {
