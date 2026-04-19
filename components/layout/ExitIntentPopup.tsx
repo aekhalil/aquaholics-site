@@ -8,8 +8,12 @@ import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/use-toast'
 
 /**
- * Exit-intent popup — fires when the user's cursor leaves the viewport upward.
- * Uses localStorage to avoid repeat shows. Lead magnet: free coral care guide PDF.
+ * Exit-intent popup.
+ * - Desktop: fires when the cursor leaves the viewport upward (classic exit intent).
+ * - Touch devices (no cursor): fires after ~70% scroll depth, or after 45s if the
+ *   user hangs around without scrolling that far. Touch devices don't emit
+ *   `mouseleave`, so without this branch the popup never shows on mobile.
+ * Uses localStorage to avoid repeat shows.
  */
 export function ExitIntentPopup() {
   const [visible, setVisible] = React.useState(false)
@@ -19,23 +23,45 @@ export function ExitIntentPopup() {
   const triggered = React.useRef(false)
 
   React.useEffect(() => {
-    // Don't show if already dismissed this session
-    if (typeof window !== 'undefined' && localStorage.getItem('exit_popup_dismissed')) return
+    if (typeof window === 'undefined') return
+    if (localStorage.getItem('exit_popup_dismissed')) return
 
-    const handler = (e: MouseEvent) => {
-      if (e.clientY <= 5 && !triggered.current) {
-        triggered.current = true
-        setVisible(true)
+    const trigger = () => {
+      if (triggered.current) return
+      triggered.current = true
+      setVisible(true)
+    }
+
+    const isTouch = window.matchMedia('(pointer: coarse)').matches
+
+    if (isTouch) {
+      const onScroll = () => {
+        const doc = document.documentElement
+        const depth = (window.scrollY + window.innerHeight) / doc.scrollHeight
+        if (depth >= 0.7) trigger()
+      }
+      // Wait 8s before wiring scroll (avoid firing during initial reading).
+      const scrollArm = setTimeout(() => {
+        window.addEventListener('scroll', onScroll, { passive: true })
+      }, 8000)
+      // Fallback: 45s dwell without scroll-depth trigger.
+      const dwellTimer = setTimeout(trigger, 45000)
+      return () => {
+        clearTimeout(scrollArm)
+        clearTimeout(dwellTimer)
+        window.removeEventListener('scroll', onScroll)
       }
     }
-    // Small delay so it doesn't fire on page load scroll
-    const timer = setTimeout(() => {
-      document.addEventListener('mouseleave', handler)
-    }, 5000)
 
+    const onMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 5) trigger()
+    }
+    const armTimer = setTimeout(() => {
+      document.addEventListener('mouseleave', onMouseLeave)
+    }, 5000)
     return () => {
-      clearTimeout(timer)
-      document.removeEventListener('mouseleave', handler)
+      clearTimeout(armTimer)
+      document.removeEventListener('mouseleave', onMouseLeave)
     }
   }, [])
 
