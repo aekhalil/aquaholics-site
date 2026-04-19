@@ -1,25 +1,17 @@
 'use client'
 
 import * as React from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 export function ShopAccessForm() {
-  const router = useRouter()
   const params = useSearchParams()
   const redirect = params.get('redirect') || '/shop'
   const target = redirect.startsWith('/shop') ? redirect : '/shop'
   const [submitting, setSubmitting] = React.useState(false)
   const [slow, setSlow] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
-
-  // Prefetch the target /shop route while the user is typing, so the RSC
-  // navigation + middleware check + products fetch is already warm by the
-  // time they hit Enter. Removes ~1s of perceived wait on mobile.
-  React.useEffect(() => {
-    router.prefetch(target)
-  }, [router, target])
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -38,10 +30,14 @@ export function ShopAccessForm() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error ?? 'Incorrect password.')
-      // router.push alone triggers a fresh RSC load of the target — the
-      // previous router.refresh() on top of it was a redundant round trip
-      // that added ~500ms for no benefit.
-      router.push(target)
+      // Hard navigation (not router.push) so the browser sends a fresh
+      // request with the just-set SHOP_COOKIE and Next's router cache
+      // cannot serve a stale redirect from when the user was unauthed.
+      // A prior revision used router.push + a prefetched target; the
+      // prefetch was captured pre-cookie and cached middleware's
+      // redirect-to-/shop-access response, which left the button stuck
+      // on "Checking…" because push silently resolved to the same URL.
+      window.location.assign(target)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong.')
       setSubmitting(false)
