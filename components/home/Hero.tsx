@@ -82,7 +82,7 @@ export function Hero() {
               className="text-white/75 text-xl leading-relaxed mb-8 max-w-lg"
             >
               Residential and commercial aquarium installation, monthly maintenance, and rare
-              coral frags — from 10-gallon nano tanks to 10,000-gallon showpiece builds, using
+              coral frags — from 20-gallon nano tanks to 5,000-gallon showpiece builds, using
               Red Sea, EcoTech, Neptune, Abyzz &amp; Octo by someone who genuinely loves the reef.
             </motion.p>
 
@@ -114,7 +114,7 @@ export function Hero() {
               className="flex flex-wrap gap-6"
             >
               {[
-                { value: '10→10k+', label: 'Gallon Range' },
+                { value: '20→5k', label: 'Gallon Range' },
                 { value: '5★', label: 'Google Rating' },
                 { value: 'WPB→Boca', label: 'Service Area' },
                 { value: '24/7', label: 'Emergency Line' },
