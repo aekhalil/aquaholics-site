@@ -34,7 +34,17 @@ export function Navbar() {
   const pathname = usePathname()
 
   React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    // rAF-coalesced so we only flip `scrolled` once per frame even during
+    // rapid scroll bursts on mobile (was re-rendering on every scroll event).
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20)
+        ticking = false
+      })
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])

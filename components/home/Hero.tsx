@@ -19,7 +19,7 @@ export function Hero() {
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-aqua/10 border border-aqua/20"
+            className="absolute rounded-full bg-aqua/10 border border-aqua/20 will-change-transform"
             style={{
               width: `${40 + i * 20}px`,
               height: `${40 + i * 20}px`,
