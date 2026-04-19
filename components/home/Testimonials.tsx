@@ -143,7 +143,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-colors"
+              className="bg-white/10 border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-colors"
             >
               <Quote className="h-8 w-8 text-aqua mb-4 opacity-60" />
               <p className="text-white text-sm leading-relaxed mb-6">

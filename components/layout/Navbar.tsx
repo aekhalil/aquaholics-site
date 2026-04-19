@@ -58,8 +58,12 @@ export function Navbar() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        // Mobile: solid bg-navy (no backdrop-filter). On iOS, backdrop-blur on
+        // a fixed full-width element forces a full-viewport re-rasterization
+        // on every scroll frame — the #1 cause of the mobile scroll stutter.
+        // Desktop keeps the blur for the frosted-glass look.
         scrolled || !isHome || mobileOpen
-          ? 'bg-navy/95 backdrop-blur-md shadow-lg shadow-navy/30'
+          ? 'bg-navy lg:bg-navy/95 lg:backdrop-blur-md shadow-lg shadow-navy/30'
           : 'bg-transparent'
       )}
     >

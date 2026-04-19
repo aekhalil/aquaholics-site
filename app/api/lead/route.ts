@@ -144,7 +144,7 @@ function buildConfirmationEmail(data: LeadData): string {
       </div>
     </div>
     <p style="text-align: center; color: #9ca3af; font-size: 12px; margin-top: 16px;">
-      Aquaholic Aquarium Services LLC · 3140 Laurel Ridge Circle, Riviera Beach, FL 33410
+      Aquaholic Aquarium Services LLC · 3140 Laurel Ridge Circle, Palm Beach Gardens, FL 33410
     </p>
   </div>`
 }

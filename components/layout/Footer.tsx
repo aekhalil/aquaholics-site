@@ -73,7 +73,7 @@ export function Footer() {
               </a>
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-aqua flex-shrink-0 mt-0.5" />
-                <span>3140 Laurel Ridge Circle, Riviera Beach, FL 33410</span>
+                <span>3140 Laurel Ridge Circle, Palm Beach Gardens, FL 33410</span>
               </div>
             </div>
             <div className="flex gap-3 mt-6">
