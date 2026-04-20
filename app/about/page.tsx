@@ -130,8 +130,8 @@ export default function AboutPage() {
               {/* Featured portfolio photo */}
               <div className="relative rounded-3xl overflow-hidden aspect-[4/3] border border-gray-100 shadow-lg">
                 <Image
-                  src={portfolioPhotos.livingRoomWhiteCabinet.src}
-                  alt={portfolioPhotos.livingRoomWhiteCabinet.alt}
+                  src={portfolioPhotos.redSeaPendantLights.src}
+                  alt={portfolioPhotos.redSeaPendantLights.alt}
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
                   className="object-cover"
@@ -142,7 +142,7 @@ export default function AboutPage() {
                     Recent Build
                   </div>
                   <p className="text-white font-semibold text-sm drop-shadow">
-                    Luxury living-room Red Sea reef — Palm Beach County
+                    Red Sea reef with pendant lights — Palm Beach County
                   </p>
                 </div>
               </div>

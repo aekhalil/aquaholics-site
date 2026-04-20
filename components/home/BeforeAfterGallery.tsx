@@ -32,7 +32,7 @@ const PLACEHOLDER_PROJECTS: GalleryProject[] = [
   { _id: '3', title: 'Modern Cube Build — Luxury Living Room', slug: { current: 'modern-cube-living-room' }, category: 'residential', location: 'Palm Beach County', tankSize: '90 gallons', coverImage: toCover(portfolioPhotos.cubeModernLivingRoom), alt: portfolioPhotos.cubeModernLivingRoom.alt },
   { _id: '4', title: 'Home Bar Reef Display — Palm Beach County', slug: { current: 'home-bar-reef-barstools' }, category: 'residential', location: 'Palm Beach County', tankSize: '180 gallons', coverImage: toCover(portfolioPhotos.barReefBarstools), alt: portfolioPhotos.barReefBarstools.alt },
   { _id: '5', title: 'Restaurant Bamboo & Lionfish Build', slug: { current: 'restaurant-bamboo-lionfish' }, category: 'commercial', location: 'Palm Beach County', tankSize: '300 gallons', coverImage: toCover(portfolioPhotos.restaurantBambooLionfish), alt: portfolioPhotos.restaurantBambooLionfish.alt },
-  { _id: '6', title: 'Acrylic Schooling Fish Display', slug: { current: 'acrylic-schooling-fish' }, category: 'saltwater', location: 'Palm Beach County', tankSize: '220 gallons', coverImage: toCover(portfolioPhotos.acrylicSchoolingFish), alt: portfolioPhotos.acrylicSchoolingFish.alt },
+  { _id: '6', title: 'Vibrant Green & Orange Reef', slug: { current: 'green-orange-reef-blue' }, category: 'saltwater', location: 'Palm Beach County', tankSize: '120 gallons', coverImage: toCover(portfolioPhotos.greenOrangeReefBlue), alt: portfolioPhotos.greenOrangeReefBlue.alt },
 ]
 
 const CATEGORY_LABELS: Record<string, string> = {
